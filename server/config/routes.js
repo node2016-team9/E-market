@@ -9,6 +9,8 @@ module.exports = function(app) {
     app.post('/login', auth.login);
     app.get('/logout', auth.logout);
 
+    app.get('/categories',controllers.categories.getAll);
+
     app.get('/', function(req, res) {
         res.render('index', {currentUser: req.user});
     });
