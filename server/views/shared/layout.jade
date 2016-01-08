@@ -1,0 +1,41 @@
+doctype
+html
+    head
+        title Auction System
+        link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/css/site.css")
+    body
+        header.nav
+        .container
+            .navbar-header
+                a.navbar-brand(href="/") Home
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href="/") Home
+                    if (currentUser)
+                        li
+                            a(href="/profile") #{currentUser.username}
+                form.navbar-form.navbar-right(method="post", action='/login')
+                    if (!currentUser)
+                        .form-group
+                            input.form-control(id="username" type="text" name="username" placeholder="Username")
+                        .form-group
+                            input.form-control(id="password" type="password" name="password" placeholder="Password")
+                        button.btn.btn-default(type="submit") Login
+                        a.btn.btn-default(href="/register") Register
+                    else
+                        a(href="/logout") Logout
+
+
+        .container
+            if (errorMessage)
+                .alert.alert-danger #{errorMessage}
+
+            block main-content
+
+        footer.modal-footer
+            p.text-center
+                | &copy; Auction System
+
+        include scripts

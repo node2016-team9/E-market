@@ -1,26 +1,31 @@
 var express = require('express'),
-    morgan = require('morgan'),
-    cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
     session = require('express-session'),
+    busboy = require('connect-busboy'),
     passport = require('passport');
 
-module.exports = function (app, config) {
+module.exports = function(app, config) {
     app.set('view engine', 'jade');
-    app.set('views', config.ROOT_PATH + '/server/views');
-
-    app.use(morgan('combined'));
+    app.set('views', config.rootPath + '/server/views');
     app.use(cookieParser());
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
     app.use(bodyParser.json());
-    app.use(session({
-        secret: '42',
-        resave: true,
-        saveUninitialized: true
-    }));
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(busboy({immediate: false}));
+    app.use(session({secret: 'magic unicorns', resave: true, saveUninitialized: true}));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(express.static(config.ROOT_PATH + '/public'));
-}
+    app.use(express.static(config.rootPath + '/public'));
+    app.use(function(req, res, next) {
+        if (req.session.error) {
+            var msg = req.session.error;
+            req.session.error = undefined;
+            app.locals.errorMessage = msg;
+        }
+        else {
+            app.locals.errorMessage = undefined;
+        }
+
+        next();
+    });
+};

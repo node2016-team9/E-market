@@ -1,4 +1,4 @@
-var UsersController = require('./users-controller');
+var UsersController = require('./UsersController');
 
 module.exports = {
     users: UsersController

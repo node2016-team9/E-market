@@ -25,9 +25,8 @@ module.exports = {
 
                 req.logIn(user, function(err) {
                     if (err) {
-                        // Instead of JSON, render some unauthorized template here
                         res.status(400);
-                        return res.send({reason: err.toString()});
+                        return res.send({reason: err.toString()}); // TODO
                     }
                     else {
                         res.redirect('/');

@@ -9,11 +9,11 @@ module.exports = function(app) {
     app.post('/login', auth.login);
     app.get('/logout', auth.logout);
 
-    app.get('/', function (req, res) {
-        res.render('index', { currentUser: req.user });
+    app.get('/', function(req, res) {
+        res.render('index', {currentUser: req.user});
     });
 
     app.get('*', function(req, res) {
-        res.render('index', { currentUser: req.user });
+        res.render('index', {currentUser: req.user});
     });
 };

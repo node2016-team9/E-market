@@ -5,7 +5,8 @@ module.exports.init = function() {
     var userSchema = mongoose.Schema({
         username: { type: String, require: '{PATH} is required', unique: true },
         salt: String,
-        hashPass: String
+        hashPass: String,
+        points: Number
     });
 
     userSchema.method({

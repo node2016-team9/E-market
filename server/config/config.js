@@ -1,16 +1,10 @@
 var path = require('path');
-var ROOT_PATH = path.normalize(__dirname + '/../../');
-var PORT = process.env.PORT || 3000;
+var rootPath = path.normalize(__dirname + '/../../');
 
 module.exports = {
     development: {
-        dbConnectionString: 'mongodb://localhost/auction',
-        ROOT_PATH: ROOT_PATH,
-        PORT: PORT
-    },
-    production: {
-        dbConnectionString: 'mongodb://localhost/auction',
-        ROOT_PATH: ROOT_PATH,
-        PORT: PORT
+        rootPath: rootPath,
+        db: 'mongodb://localhost:27017/AuctionSystemNew',
+        port: process.env.PORT || 3000
     }
 };
