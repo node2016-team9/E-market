@@ -1,7 +1,10 @@
-var User = require('mongoose').model('Category');
+var Category = require('mongoose').model('Category');
 
 module.exports = {
     getAll: function (callback) {
-        User.find({}, callback);
+        Category.find({}, callback);
+    },
+    add: function (category, callback) {
+        Category.create(category, callback);
     }
 };

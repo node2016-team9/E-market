@@ -10,10 +10,8 @@ module.exports = function(app) {
     app.get('/logout', auth.logout);
 
     app.get('/categories',controllers.categories.getAll);
-
-    app.get('/', function(req, res) {
-        res.render('index', {currentUser: req.user});
-    });
+    app.post('/categories',controllers.categories.add);
+    app.get('/', controllers.home.getAllData);
 
     app.get('*', function(req, res) {
         res.render('index', {currentUser: req.user});
