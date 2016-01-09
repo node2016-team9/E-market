@@ -6,5 +6,8 @@ module.exports = {
     },
     add: function (category, callback) {
         Category.create(category, callback);
+    },
+    getCurrentCategoryProducts: function (id, callback) {
+        Category.find({_id: id}, callback);
     }
 };

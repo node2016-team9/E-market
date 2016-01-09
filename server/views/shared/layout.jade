@@ -13,7 +13,7 @@ html
                         | Categories
                     each category in categories
                         li
-                            a(href='#')= category.name
+                            a(href='/categories/'+category._id)= category.name
             #page-content-wrapper
                 .container
                     .navbar-header
