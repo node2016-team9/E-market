@@ -11,9 +11,10 @@ html
                 ul.sidebar-nav
                     li.sidebar-brand
                         | Categories
-                    each category in categories
-                        li
-                            a(href='/categories/'+category._id)= category.name
+                    if (categories)
+                        each category in categories
+                            li
+                                a(href='/categories/' + category._id)= category.name
             #page-content-wrapper
                 .container
                     .navbar-header

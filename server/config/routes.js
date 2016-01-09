@@ -11,7 +11,10 @@ module.exports = function(app) {
 
     app.get('/categories',controllers.categories.getAll);
     app.post('/categories',controllers.categories.add);
-    app.get('/categories/:id',controllers.categories.getCurrentCategoryProducts);
+    app.get('/categories/:id',controllers.products.getProductsByCategoryId);
+
+    app.post('/products/add',controllers.products.add);
+
     app.get('/', controllers.home.getAllData);
 
     app.get('*', function(req, res) {

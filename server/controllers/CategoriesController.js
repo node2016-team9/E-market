@@ -25,15 +25,5 @@ module.exports = {
             res.send(category);
         });
 
-    },
-    getCurrentCategoryProducts: function (req, res) {
-        var id = req.params.id;
-        categories.getCurrentCategoryProducts(id, function (err, category) {
-            if (err) {
-                console.log('Error getting current category');
-                return;
-            }
-            res.send(category);
-        })
     }
 }
