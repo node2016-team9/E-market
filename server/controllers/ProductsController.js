@@ -14,7 +14,6 @@ module.exports = {
             else {
                 console.log(category + 'category name');
                 categories.getCategoryById(category, function (err, category) {
-                    console.log(category[0]._id + 'IDDDDDD');
                     category[0].products.push(product.id);
                     categories.update(category[0]._id, category[0], function (err, category) {
                         if (err) {
@@ -32,8 +31,17 @@ module.exports = {
     },
     getProductsByCategoryId: function (req, res) {
         var id = req.params.id;
-        products.getProductsByCategoryId(id, function(err,products){
-            res.send(products);
+        products.getProductsByCategoryId(id, function (err, products) {
+            categories.getAll(function (err, data) {
+                if (err) {
+                    console.log('error');
+                }
+                else {
+                    console.log(data);
+                }
+                res.render('category/products', {products: products, categories: data, currentUser: req.user});
+            });
+
         });
 
     }
