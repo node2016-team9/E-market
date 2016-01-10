@@ -24,4 +24,5 @@ module.exports = function (config) {
     CategoryModel.init();
     ProductModel.init();
 
+
 };
