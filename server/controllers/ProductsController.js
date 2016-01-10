@@ -6,24 +6,23 @@ var CONTROLLER_NAME = 'products';
 module.exports = {
     add: function (req, res) {
         var newProduct = req.body;
-        var category = req.params.id;
+        var currentCategory = req.params.id;
         var user = req.user;
         newProduct.postedBy = user.username;
-        newProduct.categoryId = category;
+        newProduct.categoryId = currentCategory;
         products.add(newProduct, function (err, product) {
             if (err) {
                 res.send(err);
             }
             else {
-                console.log(category + 'category name');
-                categories.getCategoryById(category, function (err, category) {
+                categories.getCategoryById(currentCategory, function (err, category) {
                     category[0].products.push(product.id);
                     categories.update(category[0]._id, category[0], function (err, category) {
                         if (err) {
                             console.log('Category update error');
                         }
                         else {
-                            res.send(product);
+                            res.redirect('/categories/' + currentCategory);
                         }
                     });
 
