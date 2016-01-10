@@ -1,12 +1,14 @@
 var mongoose = require('mongoose'),
-    encryption = require('../../utilities/encryption');
+    encryption = require('../../utilities/encryption'),
+    Schema = mongoose.Schema;
 
 module.exports.init = function () {
     var userSchema = new mongoose.Schema({
         username: {type: String, require: '{PATH} is required', unique: true},
         salt: String,
         hashPass: String,
-        points: Number
+        points: Number,
+        postedProducts:[{type: Schema.Types.ObjectId, ref: 'Products'}]
     });
 
     userSchema.method({
