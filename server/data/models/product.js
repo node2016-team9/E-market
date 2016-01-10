@@ -34,7 +34,7 @@ module.exports.init = function () {
                     }, function (err, product) {
                         users[0].postedProducts.push(product._id);
                         category[0].products.push(product._id);
-                        console.log(category[0]);
+
                         Category.update({_id: category[0]._id}, category[0], function (err, category) {
                             if (err) {
                                 console.log(err);

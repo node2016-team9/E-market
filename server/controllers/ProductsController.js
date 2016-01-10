@@ -6,7 +6,10 @@ var CONTROLLER_NAME = 'products';
 module.exports = {
     add: function (req, res) {
         var newProduct = req.body;
-        var category = newProduct.categoryId;
+        var category = req.params.id;
+        var user = req.user;
+        newProduct.postedBy = user.username;
+        newProduct.categoryId = category;
         products.add(newProduct, function (err, product) {
             if (err) {
                 res.send(err);
@@ -39,10 +42,19 @@ module.exports = {
                 else {
                     console.log(data);
                 }
-                res.render('category/products', {products: products, categories: data, currentUser: req.user});
+                res.render('category/products', {
+                    products: products,
+                    categories: data,
+                    currentUser: req.user,
+                    currentCategoryID: id
+                });
             });
 
         });
 
+    },
+    getAddProductForm: function (req, res) {
+        console.log('fomraaa');
+        res.render('products/add-product', {currentUser: req.user});
     }
 }

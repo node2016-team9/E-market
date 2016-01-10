@@ -8,9 +8,9 @@ module.exports = {
                 console.log('error');
             }
             else {
-                console.log(data);
+                res.render('index', {categories: data, currentUser: req.user});
             }
-            res.render('index', {categories: data, currentUser: req.user});
+
         });
 
     }
