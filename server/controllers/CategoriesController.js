@@ -8,9 +8,9 @@ module.exports = {
                 console.log('error');
             }
             else {
-                console.log(data);
+                res.send(data);
             }
-            res.send(data);
+
         });
 
     },
@@ -21,7 +21,6 @@ module.exports = {
                 console.log('Failed to add new category: ' + err);
                 return;
             }
-            console.log(category);
             res.send(category);
         });
 
