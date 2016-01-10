@@ -97,7 +97,7 @@ module.exports.init = function () {
                     Product.create({
                         name: 'Second Product',
                         price: 1600,
-                        imageUrl: 'http://www.queeniebridesmaid.co.uk/images/product/hot-style-purple-bridesmaid-dress-bnnaj0006-6647-3.jpg',
+                        imageUrl: 'neshto',
                         categoryId: category[1]._id,
                         postedBy: users[0].username
                     });
