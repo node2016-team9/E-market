@@ -19,6 +19,13 @@ module.exports = function (app) {
 
     app.get('/', controllers.home.getAllData);
 
+    app.get('/admin/home', controllers.admin.getHome);
+    app.get('/admin/categories/add', controllers.admin.getAddCategory);
+    app.post('/admin/categories/add', controllers.admin.postAddCategory);
+    app.get('/admin/categories/:id/edit', controllers.admin.getEditCategory);
+    app.post('/admin/categories/:id/edit', controllers.admin.postEditCategory);
+    app.get('/admin/products/:id/delete', controllers.admin.deleteProduct);
+
     app.get('*', function (req, res) {
         res.render('index', {currentUser: req.user});
     });
