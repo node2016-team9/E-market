@@ -5,6 +5,8 @@ module.exports = {
     },
     getProductById: function (id, callback) {
         Product.findOne({_id: id}, callback);
+    },
+    deleteProductById: function (id, callback) {
+        Product.remove({_id: id}, callback);
     }
-
 };
