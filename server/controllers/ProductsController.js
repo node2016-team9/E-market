@@ -18,10 +18,6 @@ module.exports = {
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
             services.categories.getCategoryById(currentCategory)
                 .then(function (category) {
-                    console.log('>>>>>>>>>>>>>>>>>>');
-                    console.log(category);
-                    console.log(currentCategory);
-                    console.log('>>>>>>>>>>>>>>>>>>');
                     category.products.push(product.id);
                     services.categories.update(category._id, category)
                         .then(function (category) {
@@ -45,7 +41,18 @@ module.exports = {
 
     },
     getAddProductForm: function (req, res) {
-        console.log('fomraaa');
         res.render('products/add-product', {currentUser: req.user});
+    },
+    getProductDetails: function (req, res) {
+
+        services.products.getProductById(req.params.id)
+            .then(function (product) {
+                console.log('renderira');
+                console.log(product);
+                res.render('products/product-details', product);
+            }, function (err) {
+                res.status(404)
+                    .send(err);
+            })
     }
 }

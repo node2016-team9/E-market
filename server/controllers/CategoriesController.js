@@ -23,9 +23,6 @@ module.exports = {
     },
     getProductsByCategoryId: function (req, res) {
         var id = req.params.id;
-        console.log('--------');
-        console.log('Controller', req.params);
-        console.log('--------');
         services.categories.getProductsByCategoryId(id)
             .then(function (category) {
                 res.render('category/products', {

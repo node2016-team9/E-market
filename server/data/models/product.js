@@ -8,6 +8,8 @@ module.exports.init = function () {
         name: {type: String, require: true},
         price: {type: Number, require: true},
         imageUrl: {type: String},
+        description: {type: String},
+        postedDate:{type:Date, default:Date.now},
         categoryId: {type: Schema.Types.ObjectId, ref: 'Category'},
         postedBy: {type: String, require: true}
     });
@@ -29,6 +31,7 @@ module.exports.init = function () {
                         price: 1400,
                         imageUrl: 'https://s-media-cache-ak0.pinimg.com/236x/ff/1a/cf/ff1acfa3a71f5d85f3f35de7e9b5bc12.jpg',
                         categoryId: category[0]._id,
+                        description:'Some Description',
                         postedBy: users[0].username
 
                     }, function (err, product) {
@@ -57,6 +60,7 @@ module.exports.init = function () {
                         name: 'Second Product',
                         price: 1400,
                         imageUrl: 'https://s-media-cache-ak0.pinimg.com/236x/ff/1a/cf/ff1acfa3a71f5d85f3f35de7e9b5bc12.jpg',
+                        description:'Some Description',
                         categoryId: category[0]._id,
                         postedBy: users[0].username
 
@@ -144,6 +148,7 @@ module.exports.init = function () {
                         name: 'Fifth Product',
                         price: 1400,
                         imageUrl: 'https://s-media-cache-ak0.pinimg.com/236x/ff/1a/cf/ff1acfa3a71f5d85f3f35de7e9b5bc12.jpg',
+                        description:'Some Description',
                         categoryId: category[1]._id,
                         postedBy: users[1].username
 
