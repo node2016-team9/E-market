@@ -20,7 +20,6 @@ module.exports = {
             services.users.create(newUserData)
                 .then(function (user) {
                     req.logIn(user, function (err) {
-                        console.log('vleva tuka');
                         if (err) {
                             res.status(400);
                             return res.send({reason: err.toString()}); // TODO

@@ -15,6 +15,8 @@ module.exports = function (app) {
     app.post('/categories/:id/addProduct', controllers.products.add);
     app.get('/categories/:id', controllers.categories.getProductsByCategoryId);
 
+    app.get('/products/details/:id',controllers.products.getProductDetails);
+
 
     app.get('/', controllers.home.getAllData);
 

@@ -14,5 +14,19 @@ module.exports = {
 
         });
         return promise;
+    },
+    getProductById:function(id){
+        var promise = new Promise(function (resolve, reject) {
+            products.getProductById(id, function (err, product) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(product);
+                }
+            })
+
+        });
+        return promise;
     }
 };
