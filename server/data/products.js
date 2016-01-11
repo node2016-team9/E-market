@@ -5,6 +5,10 @@ module.exports = {
     },
     getProductById: function (id, callback) {
         Product.findOne({_id: id}, callback);
+    },
+    getFirstNProducts: function (numberOfProducts, callback) {
+        Product.find({})
+            .limit(numberOfProducts)
+            .exec(callback);
     }
-
 };

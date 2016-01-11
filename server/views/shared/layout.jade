@@ -16,7 +16,7 @@ html
                         each category in categories
                             li
                                 a(href='/categories/' + category._id)= category.name
-            input( type="checkbox" ng-model="toggle")
+            input.btn.btn-default(type="checkbox", ng-model="toggle")
             | Toggle
             #page-content-wrapper
                 .navbar-header

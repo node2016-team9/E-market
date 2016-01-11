@@ -25,11 +25,19 @@ module.exports = {
         var id = req.params.id;
         services.categories.getProductsByCategoryId(id)
             .then(function (category) {
-                res.render('category/products', {
-                    products: category.products,
-                    currentUser: req.user,
-                    currentCategoryID: id
-                });
+                services.categories.getAll()
+                    .then(function (categories) {
+                        res.render('category/products', {
+                            products: category.products,
+                            currentUser: req.user,
+                            currentCategoryID: id,
+                            categories: categories
+
+                        });
+                    }, function (err) {
+                        console.log(err);
+                    })
+
 
             }, function (err) {
                 console.log(err);
