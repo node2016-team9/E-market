@@ -16,25 +16,27 @@ module.exports = {
         services.products.add(newProduct).then(function (product) {
 
             console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-            services.categories.getCategoryById(currentCategory).then(function (category) {
-                console.log('>>>>>>>>>>>>>>>>>>');
-                console.log(category);
-                console.log(currentCategory);
-                console.log('>>>>>>>>>>>>>>>>>>');
-                category.products.push(product.id);
-                services.categories.update(category._id, category).then(function (category) {
-                    res.redirect('/');
-                    res.send();
+            services.categories.getCategoryById(currentCategory)
+                .then(function (category) {
+                    console.log('>>>>>>>>>>>>>>>>>>');
+                    console.log(category);
+                    console.log(currentCategory);
+                    console.log('>>>>>>>>>>>>>>>>>>');
+                    category.products.push(product.id);
+                    services.categories.update(category._id, category)
+                        .then(function (category) {
+                            res.redirect('/');
+                            res.send();
 
+                        }, function (err) {
+                            if (err) {
+                                console.log('Category update error');
+                            }
+                        });
                 }, function (err) {
-                    if (err) {
-                        console.log('Category update error');
-                    }
+                    req.status(404)
+                        .send(err);
                 });
-            }, function (err) {
-                req.status(404)
-                    .send(err);
-            });
 
         }, function (err) {
             req.status(404)

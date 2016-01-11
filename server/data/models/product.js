@@ -168,9 +168,7 @@ module.exports.init = function () {
                             }
                         })
                     });
-
                 })
-
 
             })
 
