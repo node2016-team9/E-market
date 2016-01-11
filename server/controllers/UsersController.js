@@ -1,11 +1,11 @@
 var encryption = require('../utilities/encryption');
-var users = require('../data/users');
+var services = require('../services');
 
 var CONTROLLER_NAME = 'users';
 
 module.exports = {
     getRegister: function (req, res, next) {
-        res.render(CONTROLLER_NAME + '/register',{currentUser: req.user})
+        res.render(CONTROLLER_NAME + '/register', {currentUser: req.user})
     },
     postRegister: function (req, res, next) {
         var newUserData = req.body;
@@ -17,24 +17,24 @@ module.exports = {
         else {
             newUserData.salt = encryption.generateSalt();
             newUserData.hashPass = encryption.generateHashedPassword(newUserData.salt, newUserData.password);
-            users.create(newUserData, function (err, user) {
-                if (err) {
+            services.users.create(newUserData)
+                .then(function (user) {
+                    req.logIn(user, function (err) {
+                        console.log('vleva tuka');
+                        if (err) {
+                            res.status(400);
+                            return res.send({reason: err.toString()}); // TODO
+                        }
+                        else {
+                            res.redirect('/');
+                        }
+                    })
+                }, function (err) {
                     req.session.error = 'Failed to register new user';
                     res.redirect('/register');
                     console.log('Failed to register new user: ' + err);
                     return;
-                }
-
-                req.logIn(user, function (err) {
-                    if (err) {
-                        res.status(400);
-                        return res.send({reason: err.toString()}); // TODO
-                    }
-                    else {
-                        res.redirect('/');
-                    }
-                })
-            });
+                });
         }
     },
     getLogin: function (req, res, next) {
