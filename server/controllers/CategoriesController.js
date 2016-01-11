@@ -1,28 +1,42 @@
-var categories = require('../data/categories');
+var services = require('../services');
 
 var CONTROLLER_NAME = 'categories';
 module.exports = {
-    getAll: function (req, res, next) {
-        categories.getAll(function (err, data) {
-            if (err) {
-                console.log('error');
-            }
-            else {
+    getAll: function () {
+        services.categories.getAll()
+            .then(function (categories) {
                 res.send(data);
-            }
-
-        });
-
+            }, function (err) {
+                res.status(404)
+                    .send(err);
+            })
     },
     add: function (req, res) {
         var newCategory = req.body;
-        categories.add(newCategory, function (err, category) {
-            if (err) {
-                console.log('Failed to add new category: ' + err);
-                return;
-            }
-            res.send(category);
-        });
+        services.categories.add(newCategory)
+            .then(function (category) {
+                res.send(category);
+            }, function (err) {
+                console.log(err);
+            });
 
-    }
+    },
+    getProductsByCategoryId: function (req, res) {
+        var id = req.params.id;
+        console.log('--------');
+        console.log('Controller', req.params);
+        console.log('--------');
+        services.categories.getProductsByCategoryId(id)
+            .then(function (category) {
+                res.render('category/products', {
+                    products: category.products,
+                    currentUser: req.user,
+                    currentCategoryID: id
+                });
+
+            }, function (err) {
+                console.log(err);
+            });
+
+    },
 }

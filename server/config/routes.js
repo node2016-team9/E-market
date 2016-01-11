@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.post('/categories', controllers.categories.add);
     app.get('/categories/:id/addProduct', controllers.products.getAddProductForm);
     app.post('/categories/:id/addProduct', controllers.products.add);
-    app.get('/categories/:id', controllers.products.getProductsByCategoryId);
+    app.get('/categories/:id', controllers.categories.getProductsByCategoryId);
 
 
     app.get('/', controllers.home.getAllData);

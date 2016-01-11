@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 module.exports.init = function () {
     var categorySchema = new mongoose.Schema({
         name: {type: String, require: true, unique: true},
-        products: [{type: Schema.Types.ObjectId, ref: 'Products'}]
+        products: [{type: Schema.Types.ObjectId, ref: 'Product'}]
     });
     var Category = mongoose.model('Category', categorySchema);
 
@@ -16,11 +16,9 @@ module.exports.init = function () {
         if (collection.length === 0) {
 
             Category.create({name: 'First Category'});
-            Category.create({
-                name: 'Second Category',
-
-            });
-
+            Category.create({name: 'Second Category'});
+            Category.create({name: 'Third Category'});
+            Category.create({name: 'Fourth Category'});
             console.log('Categories added to database...');
         }
     });

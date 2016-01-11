@@ -1,8 +1,11 @@
-var categories = require('../data/categories'),
-    products = require('../data/products');
+var services = require('../services');
 
 var CONTROLLER_NAME = 'products';
 
+
+var Product = require('mongoose').model('Product');
+var Category = require('mongoose').model('Category');
+var User = require('mongoose').model('User');
 module.exports = {
     add: function (req, res) {
         var newProduct = req.body;
@@ -10,46 +13,33 @@ module.exports = {
         var user = req.user;
         newProduct.postedBy = user.username;
         newProduct.categoryId = currentCategory;
-        products.add(newProduct, function (err, product) {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                categories.getCategoryById(currentCategory, function (err, category) {
-                    category[0].products.push(product.id);
-                    categories.update(category[0]._id, category[0], function (err, category) {
-                        if (err) {
-                            console.log('Category update error');
-                        }
-                        else {
-                            res.redirect('/categories/' + currentCategory);
-                        }
-                    });
+        services.products.add(newProduct).then(function (product) {
 
-                });
-            }
-        })
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+            services.categories.getCategoryById(currentCategory).then(function (category) {
+                console.log('>>>>>>>>>>>>>>>>>>');
+                console.log(category);
+                console.log(currentCategory);
+                console.log('>>>>>>>>>>>>>>>>>>');
+                category.products.push(product.id);
+                services.categories.update(category._id, category).then(function (category) {
+                    res.redirect('/');
+                    res.send();
 
-    },
-    getProductsByCategoryId: function (req, res) {
-        var id = req.params.id;
-        products.getProductsByCategoryId(id, function (err, products) {
-            categories.getAll(function (err, data) {
-                if (err) {
-                    console.log('error');
-                }
-                else {
-                    console.log(data);
-                }
-                res.render('category/products', {
-                    products: products,
-                    categories: data,
-                    currentUser: req.user,
-                    currentCategoryID: id
+                }, function (err) {
+                    if (err) {
+                        console.log('Category update error');
+                    }
                 });
+            }, function (err) {
+                req.status(404)
+                    .send(err);
             });
 
-        });
+        }, function (err) {
+            req.status(404)
+                .send(err);
+        })
 
     },
     getAddProductForm: function (req, res) {

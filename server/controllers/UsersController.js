@@ -4,12 +4,12 @@ var users = require('../data/users');
 var CONTROLLER_NAME = 'users';
 
 module.exports = {
-    getRegister: function(req, res, next) {
-        res.render(CONTROLLER_NAME + '/register')
+    getRegister: function (req, res, next) {
+        res.render(CONTROLLER_NAME + '/register',{currentUser: req.user})
     },
-    postRegister: function(req, res, next) {
+    postRegister: function (req, res, next) {
         var newUserData = req.body;
-
+        console.log(newUserData);
         if (newUserData.password != newUserData.confirmPassword) {
             req.session.error = 'Passwords do not match!';
             res.redirect('/register');
@@ -17,13 +17,15 @@ module.exports = {
         else {
             newUserData.salt = encryption.generateSalt();
             newUserData.hashPass = encryption.generateHashedPassword(newUserData.salt, newUserData.password);
-            users.create(newUserData, function(err, user) {
+            users.create(newUserData, function (err, user) {
                 if (err) {
+                    req.session.error = 'Failed to register new user';
+                    res.redirect('/register');
                     console.log('Failed to register new user: ' + err);
                     return;
                 }
 
-                req.logIn(user, function(err) {
+                req.logIn(user, function (err) {
                     if (err) {
                         res.status(400);
                         return res.send({reason: err.toString()}); // TODO
@@ -35,7 +37,7 @@ module.exports = {
             });
         }
     },
-    getLogin: function(req, res, next) {
+    getLogin: function (req, res, next) {
         res.render(CONTROLLER_NAME + '/login');
     }
 };

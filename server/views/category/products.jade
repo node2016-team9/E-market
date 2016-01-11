@@ -3,10 +3,11 @@ extends ../shared/layout
 block main-content
     .container
         h3 Products
-        .row.text-center
-            .col-md-4
-                a.btn.btn-default(href='/categories/' + currentCategoryID + '/addProduct', type="submit")
-                    | Add Products
+        if (currentUser)
+            .row.text-center
+                .col-md-4
+                    a.btn.btn-default(href='/categories/' + currentCategoryID + '/addProduct', type="submit")
+                        | Add Products
         .row
             if (products)
                 each product in products
