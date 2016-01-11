@@ -5,6 +5,7 @@ html
         link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/site.css")
         link(rel="stylesheet" href="/css/bootstrap-theme.min.css")
+        link(rel="stylesheet" href="/libs/toastr/toastr.css")
     body
         #wrapper
             #sidebar-wrapper
@@ -35,8 +36,8 @@ html
                             a.btn.btn-default(href="/register") Register
                         else
                             a(href="/logout") Logout
-                    if (errorMessage)
-                        .alert.alert-danger #{errorMessage}
+                if (errorMessage)
+                    .alert.alert-danger #{errorMessage}
                 .jumbotron
                     block main-content
 

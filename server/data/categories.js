@@ -11,9 +11,21 @@ module.exports = {
         Category.find({name: name}, callback);
     },
     getCategoryById: function (id, callback) {
-        Category.find({_id: id}, callback);
+        Category.findOne({_id: id}, callback);
     },
     update: function (id, category, callback) {
         Category.update({_id: id}, category, callback);
+    },
+    getProductsByCategoryId: function (id, callback) {
+        Category.findOne({_id: id})
+            .populate('products')
+            .exec(function (err, done) {
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    return callback(null, done);
+                }
+            })
     }
 };
