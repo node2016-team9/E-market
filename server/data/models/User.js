@@ -9,6 +9,7 @@ module.exports.init = function () {
         hashPass: String,
         points: Number,
         postedProducts:[{type: Schema.Types.ObjectId, ref: 'Products'}]
+
     });
 
     userSchema.method({
