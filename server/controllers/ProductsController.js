@@ -22,18 +22,28 @@ module.exports = {
 
     },
     getAddProductForm: function (req, res) {
-        res.render('products/add-product', {currentUser: req.user});
+        services.categories.getAll()
+            .then(function (categories) {
+                res.render('products/add-product', {currentUser: req.user, categories: categories});
+            });
+
     },
     getProductDetails: function (req, res) {
-
         services.products.getProductById(req.params.id)
             .then(function (product) {
-                console.log('renderira');
-                console.log(product);
-                res.render('products/product-details', {product: product, currentUser: req.user});
+                services.categories.getAll()
+                    .then(function (categories) {
+                        res.render('products/product-details', {
+                            product: product,
+                            currentUser: req.user,
+                            categories: categories
+                        })
+                    }, function (err) {
+                        console.log(err);
+                    });
             }, function (err) {
                 res.status(404)
                     .send(err);
-            })
+            });
     }
 }

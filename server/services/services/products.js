@@ -28,5 +28,20 @@ module.exports = {
 
         });
         return promise;
+    },
+    getFirstNProducts:function(numberOfProducts)
+    {
+        var promise = new Promise(function (resolve, reject) {
+            products.getFirstNProducts(numberOfProducts, function (err, products) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(products);
+                }
+            })
+
+        });
+        return promise;
     }
 };
