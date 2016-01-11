@@ -30,7 +30,7 @@ module.exports = {
             .then(function (product) {
                 console.log('renderira');
                 console.log(product);
-                res.render('products/product-details', {product: product, currenrUser: req.user});
+                res.render('products/product-details', {product: product, currentUser: req.user});
             }, function (err) {
                 res.status(404)
                     .send(err);

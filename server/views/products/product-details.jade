@@ -24,3 +24,6 @@ block main-content
         .row
             .col-md-4.col-md-offset-6
                 button.btn.btn-success Bid
+            .col-md-4.col-md-offset-6
+                if(currentUser.roles.indexOf('admin') > -1)
+                    button.btn.btn-success Bid
