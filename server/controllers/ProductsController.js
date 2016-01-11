@@ -14,26 +14,7 @@ module.exports = {
         newProduct.postedBy = user.username;
         newProduct.categoryId = currentCategory;
         services.products.add(newProduct).then(function (product) {
-
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-            services.categories.getCategoryById(currentCategory)
-                .then(function (category) {
-                    category.products.push(product.id);
-                    services.categories.update(category._id, category)
-                        .then(function (category) {
-                            res.redirect('/');
-                            res.send();
-
-                        }, function (err) {
-                            if (err) {
-                                console.log('Category update error');
-                            }
-                        });
-                }, function (err) {
-                    req.status(404)
-                        .send(err);
-                });
-
+            res.redirect('/');
         }, function (err) {
             req.status(404)
                 .send(err);
@@ -49,7 +30,7 @@ module.exports = {
             .then(function (product) {
                 console.log('renderira');
                 console.log(product);
-                res.render('products/product-details', product);
+                res.render('products/product-details', {product: product, currenrUser: req.user});
             }, function (err) {
                 res.status(404)
                     .send(err);

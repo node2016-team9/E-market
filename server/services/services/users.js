@@ -27,5 +27,18 @@ module.exports = {
             })
         });
         return promise;
+    },
+    getUserByUsername: function (username) {
+        var promise = new Promise(function (resolve, reject) {
+            users.getUserByUsername(username, function (err, user) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(user);
+                }
+            })
+        });
+        return promise;
     }
 };
