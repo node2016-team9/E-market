@@ -8,8 +8,7 @@ module.exports.init = function () {
         salt: String,
         hashPass: String,
         points: Number,
-        postedProducts: [{type: Schema.Types.ObjectId, ref: 'Products'}],
-        roles: [{type: String}]
+        postedProducts:[{type: Schema.Types.ObjectId, ref: 'Products'}]
     });
 
     userSchema.method({
