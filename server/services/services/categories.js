@@ -16,7 +16,7 @@ module.exports = {
     },
     add: function (category) {
         var promise = new Promise(function (resolve, reject) {
-            categories.add(category,function (err, category) {
+            categories.add(category, function (err, category) {
                 if (err) {
                     reject(err);
                 }
@@ -24,8 +24,8 @@ module.exports = {
                     resolve(category);
                 }
             })
-
         });
+
         return promise;
     },
     getCategoryByName: function (name) {
@@ -58,16 +58,16 @@ module.exports = {
     },
     update: function (id, category) {
         var promise = new Promise(function (resolve, reject) {
-            categories.update(id,category,function (err, categories) {
+            categories.update(id, category, function (err, categories) {
                 if (err) {
                     reject(err);
                 }
                 else {
                     resolve(categories);
                 }
-            })
-
+            });
         });
+
         return promise;
     },
     getProductsByCategoryId: function (id) {
@@ -82,7 +82,6 @@ module.exports = {
                     resolve(category);
                 }
             })
-
         });
         return promise;
     }
