@@ -23,8 +23,12 @@ module.exports = {
     },
     getProductsByCategoryId: function (req, res) {
         var id = req.params.id;
+        var sortBy=req.params.sort | 'desc';
+        var username=req.params.sort;
         services.categories.getProductsByCategoryId(id)
             .then(function (category) {
+                return category;
+            }).then(function (category) {
                 services.categories.getAll()
                     .then(function (categories) {
                         res.render('category/products', {
@@ -39,7 +43,6 @@ module.exports = {
                     })
 
 
-            }, function (err) {
                 console.log(err);
             });
 
