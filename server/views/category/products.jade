@@ -20,6 +20,7 @@ block main-content
                                 br
                                 span= 'Date posted: ' +product.postedDate
                                 br
-                                a.btn.btn-default(href='/products/details/'+product.id)
-                                    | Details
+                                if (currentUser)
+                                    a.btn.btn-default(href='/products/details/'+product.id)
+                                        | Details
 
