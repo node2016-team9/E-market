@@ -1,20 +1,18 @@
 extends ../shared/layout
 block main-content
-   .row
-      .col-md-8.col-md-offset-2
-         .panel.panel-info
-            .panel-heading.text-center Orders
-            .panel-body
-               table.table.table.text-center
-                  tr.table.text-center
-                     th.text-center Product Name
-                     th.text-center Posted By
-                     th.text-center Ordered By
-                  each item in orders
-                     tr
-                        td= item.name
-                        td= item.postedBy
-                        td= item.orders[0].orderedBy
+    .row
+        .col-md-8.col-md-offset-2
+            .panel.panel-info
+                .panel-heading.text-center Orders of product posted by: #{product.postedBy}
+                .panel-body
+                    table.table.table.text-center
+                        tr.table.text-center
+                            th.text-center Ordered By
+                            th.text-center Ordered Date
+                        each order in product.orders
+                            tr
+                                td= order.orderedBy
+                                td= order.orderDate
 
 
 

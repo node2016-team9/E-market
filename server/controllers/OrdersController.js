@@ -7,8 +7,11 @@ module.exports = {
         console.log('raboti');
         var productId = req.params.id;
         services.orders.getOrdersByProductId(productId)
-            .then(function (orders) {
-                res.render('orders/product-orders', {orders: orders, currentUser: req.user});
+            .then(function (product) {
+                console.log('orders');
+                console.log(product);
+
+                res.render('orders/product-orders', {product: product, currentUser: req.user});
             })
 
     }

@@ -48,14 +48,24 @@ module.exports = {
     },
     orderProduct: function (req, res) {
         var order = req.body;
-        order.orderedBy = req.user.username;
-        console.log('aaaaaaaaaaaaaaaa');
-        console.log(order);
-        services.orders.create(order)
-            .then(function (responseOrder) {
-                res.redirect('/products/details/' + order.productId);
-            }, function (err) {
-                console.log(err);
+        services.products.getProductById(order.productId)
+            .then(function (product) {
+                if (product.postedBy == req.user.username) {
+                    req.session.error = 'You cannot order this product because you posted it';
+                    res.redirect('/products/details/' + order.productId);
+                }
+                else {
+                    order.orderedBy = req.user.username;
+                    console.log('aaaaaaaaaaaaaaaa');
+                    console.log(order);
+                    services.orders.create(order)
+                        .then(function (responseOrder) {
+                            res.redirect('/products/details/' + order.productId);
+                        }, function (err) {
+                            console.log(err);
+                        })
+                }
             })
+
     }
 }

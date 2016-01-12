@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
 module.exports.init = function () {
     var orderSchema = new mongoose.Schema({
         orderedBy: {type: String, require: true},
-        productId: {type: Schema.Types.ObjectId, ref: 'Product'}
+        productId: {type: Schema.Types.ObjectId, ref: 'Product'},
+        orderDate: {type: Date, default: Date.now}
     });
 
     var Order = mongoose.model('Order', orderSchema);
-
 
     orderSchema.post('save', function (doc) {
 
@@ -25,9 +25,7 @@ module.exports.init = function () {
                 console.log("Product updated with bid...waiting for user update " + doc + "!");
 
                 User.findOne({username: doc.orderedBy}).exec(function (err, user) {
-                    if (product.postedBy === user.username) {
-                        return;
-                    }
+
                     user.orders.push(product);
                     User.update({_id: user._id}, user, function (err, success) {
                         if (err) {
