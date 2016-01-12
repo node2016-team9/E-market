@@ -16,16 +16,60 @@ module.exports = {
     update: function (id, category, callback) {
         Category.update({_id: id}, category, callback);
     },
-    getProductsByCategoryId: function (id, callback) {
-        Category.findOne({_id: id})
-            .populate('products')
-            .exec(function (err, done) {
-                if (err) {
-                    callback(err);
-                }
-                else {
-                    return callback(null, done);
-                }
-            })
+    getProductsByCategoryId: function (id, sortBy, sortByPrice, username, callback) {
+        console.log('>>>>>>>>>>>>');
+        console.log(sortBy);
+        console.log(username);
+        console.log('>>>>>>>>>>>>');
+        if (sortBy == 'desc') {
+            var sort = -1;
+        }
+        else {
+            sort = 1;
+        }
+        if (sortByPrice == 'desc') {
+            var sortPrice = -1;
+        }
+        else {
+            sortPrice = 1;
+        }
+        console.log(username);
+        if (username != '') {
+            console.log('username');
+            console.log(username);
+            Category.findOne({_id: id})
+                .populate({
+                    path: 'products',
+                    match: {postedBy: username},
+                    options: {limit: 10, sort: {price: sortPrice, postedDate: sortBy}}
+                })
+                .exec(function (err, done) {
+                    console.log(done);
+                    if (err) {
+                        callback(err);
+                    }
+                    else {
+                        console.log(done);
+                        return callback(null, done);
+                    }
+                })
+        }
+        else {
+            Category.findOne({_id: id})
+                .populate({
+                    path: 'products',
+                    options: {limit: 10, sort: {price: sortPrice, postedDate: sortBy}}
+                })
+                .sort({postedDate: sort})
+                .exec(function (err, done) {
+
+                    if (err) {
+                        callback(err);
+                    }
+                    else {
+                        return callback(null, done);
+                    }
+                })
+        }
     }
 };

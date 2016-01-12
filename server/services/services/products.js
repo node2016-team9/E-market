@@ -15,7 +15,7 @@ module.exports = {
         });
         return promise;
     },
-    getProductById:function(id){
+    getProductById: function (id) {
         var promise = new Promise(function (resolve, reject) {
             products.getProductById(id, function (err, product) {
                 if (err) {
@@ -29,8 +29,7 @@ module.exports = {
         });
         return promise;
     },
-    getFirstNProducts:function(numberOfProducts)
-    {
+    getFirstNProducts: function (numberOfProducts) {
         var promise = new Promise(function (resolve, reject) {
             products.getFirstNProducts(numberOfProducts, function (err, products) {
                 if (err) {
