@@ -7,11 +7,13 @@ module.exports.init = function () {
     var productSchema = new mongoose.Schema({
         name: {type: String, require: true},
         price: {type: Number, require: true},
+        currentPrice: {type: Number, require: true},
         imageUrl: {type: String},
         description: {type: String},
         postedDate: {type: Date, default: Date.now},
         categoryId: {type: Schema.Types.ObjectId, ref: 'Category'},
-        postedBy: {type: String, require: true}
+        postedBy: {type: String, require: true},
+        orders: [{type: Schema.Types.ObjectId, ref: 'Order'}]
     });
 
     productSchema.post('save', function (doc) {
@@ -56,8 +58,7 @@ module.exports.init = function () {
 
         if (collection.length === 0) {
             Category.find({}).exec(function (err, categories) {
-                if(err)
-                {
+                if (err) {
                     return;
                 }
                 User.find({}).exec(function (err, users) {
@@ -74,7 +75,9 @@ module.exports.init = function () {
                             imageUrl: 'https://s-media-cache-ak0.pinimg.com/236x/ff/1a/cf/ff1acfa3a71f5d85f3f35de7e9b5bc12.jpg',
                             categoryId: categories[index],
                             description: 'Some Description' + index,
-                            postedBy:users[0].username
+                            postedBy: users[0].username,
+                            currentPrice: 1400,
+                            validUntil: Date.Now
 
 
                         }, function (err, product) {

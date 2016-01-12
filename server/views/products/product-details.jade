@@ -15,15 +15,24 @@ block main-content
                                 strong= product.name
                             li.list-group-item Posted By:
                                 strong= product.postedBy
-                            li.list-group-item Price:
+                            li.list-group-item Min Price:
                                 strong= product.price
                             li.list-group-item Posted Date:
                                 strong= product.postedDate
                             li.list-group-item Description:
                                 strong= product.description
+        form.row(action="/products/details/order",method="post")
+            .col-md-2
+                input(type="hidden" name="productId", value=product.id)
+            .col-md-2.col-md-offset-6
+                button.btn.btn-success(type="submit") Order Product
+        br
+        .row
+            .col-md-2.col-md-offset-8
+                a.btn.btn-success(href="/products/details/" + product.id + "/orders") All orders
+        br
         .row
             .col-md-4.col-md-offset-6
-                button.btn.btn-success Bid
-            .col-md-4.col-md-offset-6
-                if(currentUser.roles.indexOf('admin') > -1)
-                    button.btn.btn-success Test button for admin
+                if(currentUser)
+                    if(currentUser.roles.indexOf('admin') > -1)
+                        button.btn.btn-success Test button for admin

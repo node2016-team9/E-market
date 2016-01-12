@@ -17,6 +17,10 @@ module.exports = function (app) {
 
     app.get('/products/details/:id', controllers.products.getProductDetails);
 
+    app.post('/products/details/order', controllers.products.orderProduct);
+
+    app.get('/products/details/:id/orders', controllers.orders.getProductOrders);
+
     app.get('/', controllers.home.getAllData);
 
     app.get('*', function (req, res) {
