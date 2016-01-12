@@ -45,5 +45,17 @@ module.exports = {
                 res.status(404)
                     .send(err);
             });
+    },
+    orderProduct: function (req, res) {
+        var order = req.body;
+        order.orderedBy = req.user.username;
+        console.log('aaaaaaaaaaaaaaaa');
+        console.log(order);
+        services.orders.create(order)
+            .then(function (responseOrder) {
+                res.redirect('/products/details/' + order.productId);
+            }, function (err) {
+                console.log(err);
+            })
     }
 }

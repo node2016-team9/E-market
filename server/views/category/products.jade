@@ -2,12 +2,33 @@ extends ../shared/layout
 
 block main-content
     .container
-        h3 Products
         if (currentUser)
             .row.text-center
-                .col-md-4
+                .col-md-2.col-md-offset-10
                     a.btn.btn-default(href='/categories/' + currentCategoryID + '/addProduct', type="submit")
                         | Add Products
+            hr
+            form(action="/categories/" + currentCategoryID,method="get")
+                .row.text-center
+                    .col-md-3
+                        select.form-control(name="date")
+                            option(value='')
+                             | Sort By Date
+                            option(value='desc') Desc
+                            option(value='asc') Asc
+                    .col-md-3
+                        select.form-control(name="price")
+                            option(value='')
+                                | Sort By Price
+                            option(value='desc') Desc
+                            option(value='asc') Asc
+                    .col-md-3
+                        input.form-control-sm(id="username",name="username", class="form-control",placeholder="Find By Username")
+                    .col-md-3
+                        input.btn.btn-default(type="submit" value="Filter")
+
+        br
+        br
         .row
             if (products)
                 each product in products
@@ -18,9 +39,11 @@ block main-content
                                 img(width="100%", height="300px",src=product.imageUrl)
                                 span= 'Posted by: ' + product.postedBy
                                 br
-                                span= 'Date posted: ' +product.postedDate
+                                span= 'Date posted: ' + product.postedDate
+                                br
+                                span= 'Price: ' + product.price
                                 br
                                 if (currentUser)
-                                    a.btn.btn-default(href='/products/details/'+product.id)
+                                    a.btn.btn-default(href='/products/details/' + product.id)
                                         | Details
 
