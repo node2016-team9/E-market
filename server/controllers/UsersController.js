@@ -1,5 +1,6 @@
 var encryption = require('../utilities/encryption');
 var services = require('../services');
+var moment = require('moment');
 
 var CONTROLLER_NAME = 'users';
 
@@ -43,8 +44,33 @@ module.exports = {
 
         services.products.getProductsByIdArray(req.user.postedProducts)
             .then(function (userProducts) {
-                console.log("In getProfie then");
+
+                console.log("BeforeFor");
                 console.log(userProducts);
+                for (var i = 0; i < userProducts.length; i += 1) {
+                    console.log(i);
+                    console.log(userProducts[i].postedDate);
+                    var dateFromProduct = userProducts[i].postedDate;
+                    var date = moment(new Date(dateFromProduct));
+                    console.log(date.format("LL"));
+
+                    userProducts[i] = {
+                        price: userProducts[i].price,
+                        postedDate: date.format("LL"),
+                        postedBy: userProducts[i].postedBy,
+                        description: userProducts[i].description,
+                        imageUrl: userProducts[i].imageUrl,
+                        name: userProducts[i].name,
+                        _id: userProducts[i]._id,
+                        orders: userProducts[i].orders,
+                        __v: userProducts[i].__v,
+                        categoryId: userProducts[i].categoryId
+                    };
+
+                }
+                console.log("AfterFor");
+
+                console.log(userProducts[0]);
                 res.render(CONTROLLER_NAME + '/profile', {
                     currentUser: req.user,
                     currentUserProducts: userProducts
