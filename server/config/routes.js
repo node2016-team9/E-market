@@ -9,6 +9,8 @@ module.exports = function (app) {
     app.post('/login', auth.login);
     app.get('/logout', auth.logout);
 
+    app.get('/profile', controllers.users.getProfile);
+
     app.get('/categories', controllers.categories.getAll);
     app.post('/categories', controllers.categories.add);
     app.get('/categories/:id/addProduct', controllers.products.getAddProductForm);

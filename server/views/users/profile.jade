@@ -1,0 +1,28 @@
+extends ../shared/layout
+
+block main-content
+     h3.text-center
+      | Greetings,&nbsp;
+      = currentUser.username
+      |  welcome to your profile!
+     hr
+     h3 Here's a list of your auctions
+     div.row
+         div.col-md-5
+             table.table.table-bordered
+                 thead
+                     tr.thead-inverse
+                     th.text-center Name
+                     th.text-center  Posted On
+                     th.text-center  Description
+                     th.text-center  Price
+                 tbody
+                    each    product in currentUserProducts
+                        tr.text-center
+                            td: a(href='/products/details/'+ product._id)= product.name
+                            td= product.postedDate
+                            td= product.description
+                            td= product.price
+         div.col-md-5
+             span there
+

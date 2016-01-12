@@ -10,5 +10,12 @@ module.exports = {
         Product.find({})
             .limit(numberOfProducts)
             .exec(callback);
+    },
+    getProductsByIdArray: function (idArray, callback) {
+        Product
+            .find({})
+            .where("_id")
+            .in(idArray)
+            .exec(callback);
     }
 };

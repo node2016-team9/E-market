@@ -38,5 +38,17 @@ module.exports = {
     },
     getLogin: function (req, res, next) {
         res.render(CONTROLLER_NAME + '/login');
+    },
+    getProfile: function (req, res, next) {
+
+        services.products.getProductsByIdArray(req.user.postedProducts)
+            .then(function (userProducts) {
+                console.log("In getProfie then");
+                console.log(userProducts);
+                res.render(CONTROLLER_NAME + '/profile', {
+                    currentUser: req.user,
+                    currentUserProducts: userProducts
+                });
+            });
     }
 };
