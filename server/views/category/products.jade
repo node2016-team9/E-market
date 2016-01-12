@@ -7,12 +7,19 @@ block main-content
                 .col-md-2.col-md-offset-10
                     a.btn.btn-default(href='/categories/' + currentCategoryID + '/addProduct', type="submit")
                         | Add Products
+            hr
             form(action="/categories/" + currentCategoryID,method="get")
                 .row.text-center
                     .col-md-3
-                        select.form-control(name="sort")
+                        select.form-control(name="date")
                             option(value='')
                              | Sort By Date
+                            option(value='desc') Desc
+                            option(value='asc') Asc
+                    .col-md-3
+                        select.form-control(name="price")
+                            option(value='')
+                                | Sort By Price
                             option(value='desc') Desc
                             option(value='asc') Asc
                     .col-md-3
