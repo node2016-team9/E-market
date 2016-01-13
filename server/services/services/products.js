@@ -39,6 +39,8 @@ module.exports = {
                 }
             });
         });
+
+        return promise;
     },
     getFirstNProducts: function (numberOfProducts) {
         var promise = new Promise(function (resolve, reject) {
