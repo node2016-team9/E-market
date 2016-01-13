@@ -12,5 +12,12 @@ module.exports = {
                 options: {limit: 10}
             })
             .exec(callback);
+    },
+    getOrdersByIdArray: function (idArray, callback) {
+        Product
+            .find({})
+            .where("_id")
+            .in(idArray)
+            .exec(callback);
     }
 };

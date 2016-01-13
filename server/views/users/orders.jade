@@ -1,0 +1,20 @@
+extends ../shared/layout
+
+block main-content
+   h1.text-center Here are your orders!
+
+   div.container
+      table.table-bordered.table
+         thead
+            tr.thead-inverse
+            th.text-center Name of the order
+            th.text-center  Price
+            th.text-center  Description
+            th.text-center  Item owner
+         tbody
+            each    order in orders
+               tr.text-center
+                  td: a(href='/products/details/' + product._id)= order.name
+                  td yey
+                  td= order.description
+                  td= order.price

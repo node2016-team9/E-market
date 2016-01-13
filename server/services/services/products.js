@@ -60,7 +60,5 @@ module.exports = {
                 })
         });
         return promise;
-
-
     }
 };

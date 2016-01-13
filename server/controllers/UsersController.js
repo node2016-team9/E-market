@@ -44,15 +44,9 @@ module.exports = {
 
         services.products.getProductsByIdArray(req.user.postedProducts)
             .then(function (userProducts) {
-
-                console.log("BeforeFor");
-                console.log(userProducts);
                 for (var i = 0; i < userProducts.length; i += 1) {
-                    console.log(i);
-                    console.log(userProducts[i].postedDate);
                     var dateFromProduct = userProducts[i].postedDate;
                     var date = moment(new Date(dateFromProduct));
-                    console.log(date.format("LL"));
 
                     userProducts[i] = {
                         price: userProducts[i].price,
@@ -66,15 +60,24 @@ module.exports = {
                         __v: userProducts[i].__v,
                         categoryId: userProducts[i].categoryId
                     };
-
                 }
-                console.log("AfterFor");
-
-                console.log(userProducts[0]);
+                console.log("User info");
+                console.log(req.user);
+                console.log("End of User Info");
                 res.render(CONTROLLER_NAME + '/profile', {
                     currentUser: req.user,
                     currentUserProducts: userProducts
                 });
             });
+    },
+    getOrders: function (req, res, next) {
+        console.log("In getOrders");
+        services.orders.getOrdersByIdArray(req.user.orders)
+            .then(function (orders) {
+                console.log("Orders");
+                console.log(orders);
+                console.log("End of orders");
+                res.render(CONTROLLER_NAME + '/orders', {currentUser: req.user, orders: orders})
+            })
     }
 };

@@ -10,6 +10,7 @@ module.exports = function (app) {
     app.get('/logout', auth.logout);
 
     app.get('/profile', controllers.users.getProfile);
+    app.get('/profile/orders', controllers.users.getOrders);
 
     app.get('/categories', controllers.categories.getAll);
     app.post('/categories', controllers.categories.add);

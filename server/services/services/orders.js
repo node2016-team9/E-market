@@ -31,5 +31,23 @@ module.exports = {
 
         });
         return promise;
+    },
+    getOrdersByIdArray: function (idArray) {
+        var userProducts = [];
+        var promise = new Promise(function (resolve, reject) {
+
+            console.log("Outside getProductsByIDArray");
+            orders.getOrdersByIdArray(idArray, function (err, products) {
+                if (err) {
+                    reject(err);
+                }
+                else{
+                    console.log("Result of getProductsByIDArray");
+                    console.log(products);
+                    resolve(products);
+                }
+            })
+        });
+        return promise;
     }
 };
