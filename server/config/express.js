@@ -5,8 +5,8 @@ var express = require('express'),
     busboy = require('connect-busboy'),
     passport = require('passport');
 
-module.exports = function(app, config) {
-
+module.exports = function (app, config) {
+    app.locals.moment = require('moment');
     app.set('view engine', 'jade');
     app.set('views', config.rootPath + '/server/views');
     app.use(cookieParser());
@@ -17,7 +17,7 @@ module.exports = function(app, config) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(express.static(config.rootPath + '/public'));
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         if (req.session.error) {
             var msg = req.session.error;
             req.session.error = undefined;
