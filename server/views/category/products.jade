@@ -39,7 +39,7 @@ block main-content
                                 img(width="100%", height="300px",src=product.imageUrl)
                                 span= 'Posted by: ' + product.postedBy
                                 br
-                                span= 'Date posted: ' + product.postedDate
+                                span Date posted: #{moment(product.postedDate).format('LLL')}
                                 br
                                 span= 'Price: ' + product.price
                                 br
@@ -67,8 +67,8 @@ block main-content
                 firstClass: 'first'
             }).on("page", function (event, num) {
                 var search = window.location.search.split('&page=')[0];
-                if (window.location.search == ''||window.location.search.indexOf('?page=')==0 ){
-                    search ='?page=' + num;
+                if (window.location.search == '' || window.location.search.indexOf('?page=') == 0) {
+                    search = '?page=' + num;
                 }
                 else {
                     search += '&page=' + num;

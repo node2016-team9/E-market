@@ -19,7 +19,7 @@ block main-content
                             li.list-group-item Min Price:
                                 strong= product.price
                             li.list-group-item Posted Date:
-                                strong= product.postedDate
+                                strong #{moment(product.postedDate).format('LLL')}
                             li.list-group-item Description:
                                 strong= product.description
         form.row(action="/products/details/order",method="post")
