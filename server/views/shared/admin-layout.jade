@@ -1,0 +1,48 @@
+doctype
+html
+    head
+        title Auction administration
+        link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/css/site.css")
+        link(rel="stylesheet" href="/css/bootstrap-theme.min.css")
+        link(rel="stylesheet" href="/libs/toastr/toastr.css")
+    body
+        #wrapper
+            #sidebar-wrapper
+                ul.sidebar-nav
+                    li.sidebar-brand
+                        | Edit categories
+                        li
+                            a(href='/admin/categories/add')
+                                span.glyphicon.glyphicon-plus
+                                |  Add category
+                    if (categories)
+                        each category in categories
+                            li
+                                if (editCategory && editCategory._id === category._id)
+                                    a(href='/admin/categories/' + category._id + '/edit')
+                                        b
+                                            | #{category.name} (Editing)
+                                else
+                                    a(href='/admin/categories/' + category._id + '/edit')
+                                        | #{category.name}
+            #page-content-wrapper
+                .navbar-header
+                    a.navbar-brand(href="/admin") Admin index
+                .navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href="/") Go back to the site
+                        if (currentUser)
+                            li
+                                a(href="/profile") #{currentUser.username}
+                if (errorMessage)
+                    .alert.alert-danger #{errorMessage}
+                .jumbotron
+                    block main-content
+
+        footer.modal-footer
+            p.text-center
+                | &copy; Auction System - Admin panel
+
+        include scripts

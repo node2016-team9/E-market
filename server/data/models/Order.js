@@ -11,11 +11,10 @@ module.exports.init = function () {
     var Order = mongoose.model('Order', orderSchema);
 
     orderSchema.post('save', function (doc) {
-
+        console.log(doc.productId);
         var Product = require('mongoose').model('Product');
         var User = require('mongoose').model('User');
         Product.findOne({'_id': doc.productId}).exec(function (err, product) {
-
             product.orders.push(doc.id);
             Product.update({_id: product._id}, product, function (err, success) {
                 if (err) {

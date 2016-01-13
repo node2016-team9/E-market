@@ -6,6 +6,7 @@ router
     .get('/', controllers.users.getLogin)
     .post('/', auth.login)
     .get('/', auth.logout);
+
 module.exports = function (app) {
     app.use('/login', router);
 };

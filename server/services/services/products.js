@@ -29,6 +29,17 @@ module.exports = {
         });
         return promise;
     },
+    deleteProductById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            products.deleteProductById(id, function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    },
     getFirstNProducts: function (numberOfProducts) {
         var promise = new Promise(function (resolve, reject) {
             products.getFirstNProducts(numberOfProducts, function (err, products) {
