@@ -2,12 +2,33 @@ extends ../shared/layout
 
 block main-content
     .container
-        h3 Products
         if (currentUser)
             .row.text-center
-                .col-md-4
+                .col-md-2.col-md-offset-10
                     a.btn.btn-default(href='/categories/' + currentCategoryID + '/addProduct', type="submit")
                         | Add Products
+            hr
+            form(action="/categories/" + currentCategoryID,method="get")
+                .row.text-center
+                    .col-md-3
+                        select.form-control(name="date")
+                            option(value='')
+                                | Sort By Date
+                            option(value='desc') Desc
+                            option(value='asc') Asc
+                    .col-md-3
+                        select.form-control(name="price")
+                            option(value='')
+                                | Sort By Price
+                            option(value='desc') Desc
+                            option(value='asc') Asc
+                    .col-md-3
+                        input.form-control-sm(id="username",name="username", class="form-control",placeholder="Find By Username")
+                    .col-md-3
+                        input.btn.btn-default(type="submit" value="Filter")
+
+        br
+        br
         .row
             if (products)
                 each product in products
@@ -18,9 +39,40 @@ block main-content
                                 img(width="100%", height="300px",src=product.imageUrl)
                                 span= 'Posted by: ' + product.postedBy
                                 br
-                                span= 'Date posted: ' +product.postedDate
+                                span= 'Date posted: ' + product.postedDate
+                                br
+                                span= 'Price: ' + product.price
                                 br
                                 if (currentUser)
-                                    a.btn.btn-default(href='/products/details/'+product.id)
+                                    a.btn.btn-default(href='/products/details/' + product.id)
                                         | Details
-
+        div(id="page-selection") Pagination goes here
+        script.
+            var currentPage = window.location.search.split('page=')[1];
+            console.log(window.location.search);
+            $('#page-selection').bootpag({
+                total: 20,
+                page: currentPage,
+                maxVisible: 5,
+                leaps: true,
+                firstLastUse: true,
+                first: '?',
+                last: '?',
+                wrapClass: 'pagination',
+                activeClass: 'active',
+                disabledClass: 'disabled',
+                nextClass: 'next',
+                prevClass: 'prev',
+                lastClass: 'last',
+                firstClass: 'first'
+            }).on("page", function (event, num) {
+                var search = window.location.search.split('&page=')[0];
+                if (window.location.search == ''||window.location.search.indexOf('?page=')==0 ){
+                    search ='?page=' + num;
+                }
+                else {
+                    search += '&page=' + num;
+                }
+                var url = window.location.pathname + search;
+                $(location).attr("href", url);
+            });

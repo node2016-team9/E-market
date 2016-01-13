@@ -8,5 +8,10 @@ module.exports = {
     },
     deleteProductById: function (id, callback) {
         Product.remove({_id: id}, callback);
+    },
+    getFirstNProducts: function (numberOfProducts, callback) {
+        Product.find({})
+            .limit(numberOfProducts)
+            .exec(callback);
     }
 };

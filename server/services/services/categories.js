@@ -30,7 +30,7 @@ module.exports = {
     },
     getCategoryByName: function (name) {
         var promise = new Promise(function (resolve, reject) {
-            categories.getCategoryByName(name,function (err, category) {
+            categories.getCategoryByName(name, function (err, category) {
                 if (err) {
                     reject(err);
                 }
@@ -44,7 +44,7 @@ module.exports = {
     },
     getCategoryById: function (id) {
         var promise = new Promise(function (resolve, reject) {
-            categories.getCategoryById(id,function (err, category) {
+            categories.getCategoryById(id, function (err, category) {
                 if (err) {
                     reject(err);
                 }
@@ -70,9 +70,9 @@ module.exports = {
 
         return promise;
     },
-    getProductsByCategoryId: function (id) {
+    getProductsByCategoryId: function (id, sortBy, sortPrice, username,page) {
         var promise = new Promise(function (resolve, reject) {
-            categories.getProductsByCategoryId(id,function (err, category) {
+            categories.getProductsByCategoryId(id, sortBy, sortPrice, username,page, function (err, category) {
                 if (err) {
                     console.log('err');
                     console.log(err);

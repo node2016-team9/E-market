@@ -22,18 +22,51 @@ module.exports = {
 
     },
     getAddProductForm: function (req, res) {
-        res.render('products/add-product', {currentUser: req.user});
+        services.categories.getAll()
+            .then(function (categories) {
+                res.render('products/add-product', {currentUser: req.user, categories: categories});
+            });
+
     },
     getProductDetails: function (req, res) {
-
+        console.log('router raboti');
         services.products.getProductById(req.params.id)
             .then(function (product) {
-                console.log('renderira');
-                console.log(product);
-                res.render('products/product-details', {product: product, currenrUser: req.user});
+                services.categories.getAll()
+                    .then(function (categories) {
+                        res.render('products/product-details', {
+                            product: product,
+                            currentUser: req.user,
+                            categories: categories
+                        })
+                    }, function (err) {
+                        console.log(err);
+                    });
             }, function (err) {
                 res.status(404)
                     .send(err);
+            });
+    },
+    orderProduct: function (req, res) {
+        var order = req.body;
+        services.products.getProductById(order.productId)
+            .then(function (product) {
+                if (product.postedBy == req.user.username) {
+                    req.session.error = 'You cannot order this product because you posted it';
+                    res.redirect('/products/details/' + order.productId);
+                }
+                else {
+                    order.orderedBy = req.user.username;
+                    console.log('aaaaaaaaaaaaaaaa');
+                    console.log(order);
+                    services.orders.create(order)
+                        .then(function (responseOrder) {
+                            res.redirect('/products/details/' + order.productId);
+                        }, function (err) {
+                            console.log(err);
+                        })
+                }
             })
+
     }
 }

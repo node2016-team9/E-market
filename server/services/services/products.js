@@ -15,7 +15,7 @@ module.exports = {
         });
         return promise;
     },
-    getProductById:function(id){
+    getProductById: function (id) {
         var promise = new Promise(function (resolve, reject) {
             products.getProductById(id, function (err, product) {
                 if (err) {
@@ -39,7 +39,19 @@ module.exports = {
                 }
             });
         });
+    },
+    getFirstNProducts: function (numberOfProducts) {
+        var promise = new Promise(function (resolve, reject) {
+            products.getFirstNProducts(numberOfProducts, function (err, products) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(products);
+                }
+            })
 
+        });
         return promise;
     }
 };
