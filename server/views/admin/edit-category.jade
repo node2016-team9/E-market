@@ -1,0 +1,36 @@
+extends ../shared/admin-layout
+
+block main-content
+    form.form-horizontal(method="post" action="")
+        fieldset
+            legend Edit category
+            .form-group
+                label.col-md-4.control-label(for="name") Name
+                .col-md-4
+                    input.form-control(type="text" name="name" placeholder="#{editCategory.name}")
+            .form-group
+                .col-md-4.col-md-offset-4
+                    input.btn.btn-primary(type="submit" value="Change")
+        if (editCategory && editCategory.products)
+            table.table.table-striped.table-hover
+                thead
+                    tr
+                        th Name
+                        th Image
+                        th Posted by
+                        th Posted on
+                        th Details
+                        th Delete
+                tbody
+                    each product in editCategory.products
+                        tr
+                            td= product.name
+                            td
+                                img(width="50px" height="50px" src=product.imageUrl)
+                            td= product.postedBy
+                            td= product.postedDate
+                            td
+                                a(href='/products/details/' + product._id) Details
+                            td
+                                a(href='/admin/products/' + product._id + '/delete') Delete
+                            td

@@ -24,12 +24,11 @@ module.exports = {
     getProductsByCategoryId: function (req, res) {
 
         var id = req.params.id;
-        console.log(id);
         var sortBy = req.query.date || 'desc';
         var sortPrice = req.query.price || 'desc';
         var username = req.query.username || '';
-        var page = req.query.page || 1;
-        services.categories.getProductsByCategoryId(id, sortBy, sortPrice, username, page)
+        var page=req.query.page || 1;
+        services.categories.getProductsByCategoryId(id, sortBy, sortPrice, username,page)
             .then(function (category) {
                 return category;
             }).then(function (category) {

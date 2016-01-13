@@ -17,7 +17,7 @@ module.exports.init = function () {
     });
 
     productSchema.post('save', function (doc) {
-
+        console.log(doc.categoryId);
         var Category = require('mongoose').model('Category');
         Category.findOne({'_id': doc.categoryId}).exec(function (err, category) {
             console.log(category);

@@ -24,8 +24,8 @@ module.exports = {
                     resolve(category);
                 }
             })
-
         });
+
         return promise;
     },
     getCategoryByName: function (name) {
@@ -65,9 +65,9 @@ module.exports = {
                 else {
                     resolve(categories);
                 }
-            })
-
+            });
         });
+
         return promise;
     },
     getProductsByCategoryId: function (id, sortBy, sortPrice, username,page) {
@@ -82,7 +82,6 @@ module.exports = {
                     resolve(category);
                 }
             })
-
         });
         return promise;
     }
