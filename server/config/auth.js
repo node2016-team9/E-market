@@ -5,7 +5,9 @@ module.exports = {
         var auth = passport.authenticate('local', function(err, user) {
             if (err) return next(err);
             if (!user) {
-                res.send({success: false}); // TODO:
+                req.session.error = 'Credentials not valid!';
+                res.redirect('/');
+               // res.send({success: false}); // TODO:
             }
 
             req.logIn(user, function(err) {

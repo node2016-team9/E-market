@@ -6,7 +6,7 @@ module.exports = {
         Order.create(order, callback);
     },
     getAllByProductId: function (id, callback) {
-        Product.find({_id: id})
+        Product.findOne({_id: id})
             .populate({
                 path: 'orders',
                 options: {limit: 10}

@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "angular": "~1.4.8",
+    "bootpag": "~1.0.7",
     "bootstrap": "~3.3.6",
     "jquery-ui": "~1.11.4",
     "toastr": "~2.1.2"
