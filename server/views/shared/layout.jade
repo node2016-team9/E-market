@@ -23,8 +23,6 @@ html
             input.btn.btn-default(type="checkbox", ng-model="toggle")
             | Toggle
             #page-content-wrapper
-                .navbar-header
-                    a.navbar-brand(href="/") Home
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav
                         li
@@ -33,6 +31,9 @@ html
                             li
                                 a(href="/profile") #{currentUser.username}
                     form.navbar-form.navbar-right(method="post", action='/login')
+                        if(currentUser)
+                            if(currentUser.roles.indexOf('admin') > -1)
+                                a(href='/admin/home') Admin Panel
                         if (!currentUser)
                             .form-group
                                 input.form-control(id="username" type="text" name="username" placeholder="Username")
