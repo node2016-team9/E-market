@@ -1,5 +1,6 @@
 var router = require('express').Router(),
-    controllers = require('../../controllers');
+    controllers = require('../../controllers'),
+    auth = require('../auth');
 
 
 router
@@ -9,5 +10,5 @@ router
 
 
 module.exports = function (app) {
-    app.use('/products', router);
+    app.use('/products', auth.isAuthenticated, router);
 };

@@ -4,7 +4,7 @@ var router = require('express').Router(),
 
 router
     .get('/', controllers.categories.getAll)
-    .get('/:id/addProduct', controllers.products.getAddProductForm)
+    .get('/:id/addProduct', auth.isAuthenticated, controllers.products.getAddProductForm)
     .get('/:id', controllers.categories.getProductsByCategoryId)
     .post('/', controllers.categories.add)
     .post('/:id/addProduct', controllers.products.add);

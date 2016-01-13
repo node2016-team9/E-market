@@ -1,4 +1,5 @@
 var Category = require('mongoose').model('Category');
+var Product = require('mongoose').model('Product');
 
 module.exports = {
     getAll: function (callback) {
@@ -62,7 +63,7 @@ module.exports = {
             Category.findOne({_id: id})
                 .populate({
                     path: 'products',
-                    options: {limit: 6, skip: 6 * (page - 1), sort: {price: sortPrice, postedDate: -1}}
+                    options: {limit: 3, skip: 3 * (page - 1), sort: {price: sortPrice, postedDate: -1}}
                 })
                 .sort({postedDate: sort})
                 .exec(function (err, done) {
@@ -75,5 +76,18 @@ module.exports = {
                     }
                 })
         }
+    },
+    getCountOfProductsbyCategoryId: function (id, callback) {
+        Category.findOne({_id: id})
+            .populate('products')
+            .exec(function (err, done) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log('couuuuuuuuuuuunt' + done.products.length);
+                    return callback(null, done.products.length);
+                }
+            })
     }
 };

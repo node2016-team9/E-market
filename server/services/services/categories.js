@@ -84,5 +84,21 @@ module.exports = {
             })
         });
         return promise;
+    },
+    getCountOfProductsbyCategoryId:function(id)
+    {
+        var promise = new Promise(function (resolve, reject) {
+            categories.getCountOfProductsbyCategoryId(id, function (err, count) {
+                if (err) {
+                    console.log('err');
+                    console.log(err);
+                    reject(err);
+                }
+                else {
+                    resolve(count);
+                }
+            })
+        });
+        return promise;
     }
 }

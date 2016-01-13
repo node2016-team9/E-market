@@ -14,7 +14,7 @@ module.exports = {
         newProduct.postedBy = user.username;
         newProduct.categoryId = currentCategory;
         services.products.add(newProduct).then(function (product) {
-            res.redirect('/');
+            res.redirect('/categories/'+currentCategory);
         }, function (err) {
             req.status(404)
                 .send(err);
