@@ -1,7 +1,7 @@
 extends ../shared/layout
 
 block main-content
-     h3.text-center
+     h2.text-center
       | Greetings,&nbsp;
       = currentUser.username
       |  welcome to your profile!
@@ -33,7 +33,8 @@ block main-content
 
 
 
-
-            if currentUser.orders.length>0
-                div.col-md-5.col-md-offset-1
-                   a(href='/profile/orders') Orders
+            div.col-md-5.col-md-offset-1
+            if currentUser.orders.length<=0
+                   a(href='/profile/orders').disabled.btn.btn-danger.btn-lg.center-block You don't have any orders
+            else if currentUser.orders.length>0
+                    a(href='/profile/orders').btn.btn-info.btn-lg.center-block Your orders
