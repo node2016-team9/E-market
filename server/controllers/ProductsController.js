@@ -29,6 +29,7 @@ module.exports = {
 
     },
     getProductDetails: function (req, res) {
+        console.log('router raboti');
         services.products.getProductById(req.params.id)
             .then(function (product) {
                 services.categories.getAll()
