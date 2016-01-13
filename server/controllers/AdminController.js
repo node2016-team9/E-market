@@ -10,7 +10,7 @@ module.exports = {
                 console.log('error');
             }
             else {
-                res.render('admin/home', { categories: data });
+                res.render('admin/home', {categories: data});
             }
         });
     },
@@ -32,6 +32,7 @@ module.exports = {
     },
     getEditCategory: function (req, res, next) {
         var editCategoryId = req.params.id;
+        console.log(editCategoryId);
         services.categories.getProductsByCategoryId(editCategoryId)
             .then(function (category) {
                 return category;
@@ -42,7 +43,7 @@ module.exports = {
                 categories.getAll(function (err, categories) {
                     if (err) console.log('Could not fetch all categories in editCategory:' + err);
                     else {
-                        res.render('admin/edit-category', { editCategory: category, categories: categories })
+                        res.render('admin/edit-category', {editCategory: category, categories: categories})
                     }
                 })
             });
