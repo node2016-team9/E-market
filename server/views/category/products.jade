@@ -13,7 +13,7 @@ block main-content
                     .col-md-3
                         select.form-control(name="date")
                             option(value='')
-                             | Sort By Date
+                                | Sort By Date
                             option(value='desc') Desc
                             option(value='asc') Asc
                     .col-md-3
@@ -46,4 +46,33 @@ block main-content
                                 if (currentUser)
                                     a.btn.btn-default(href='/products/details/' + product.id)
                                         | Details
-
+        div(id="page-selection") Pagination goes here
+        script.
+            var currentPage = window.location.search.split('page=')[1];
+            console.log(window.location.search);
+            $('#page-selection').bootpag({
+                total: 20,
+                page: currentPage,
+                maxVisible: 5,
+                leaps: true,
+                firstLastUse: true,
+                first: '?',
+                last: '?',
+                wrapClass: 'pagination',
+                activeClass: 'active',
+                disabledClass: 'disabled',
+                nextClass: 'next',
+                prevClass: 'prev',
+                lastClass: 'last',
+                firstClass: 'first'
+            }).on("page", function (event, num) {
+                var search = window.location.search.split('&page=')[0];
+                if (window.location.search == ''||window.location.search.indexOf('?page=')==0 ){
+                    search ='?page=' + num;
+                }
+                else {
+                    search += '&page=' + num;
+                }
+                var url = window.location.pathname + search;
+                $(location).attr("href", url);
+            });

@@ -70,9 +70,9 @@ module.exports = {
         });
         return promise;
     },
-    getProductsByCategoryId: function (id, sortBy, sortPrice, username) {
+    getProductsByCategoryId: function (id, sortBy, sortPrice, username,page) {
         var promise = new Promise(function (resolve, reject) {
-            categories.getProductsByCategoryId(id, sortBy, sortPrice, username, function (err, category) {
+            categories.getProductsByCategoryId(id, sortBy, sortPrice, username,page, function (err, category) {
                 if (err) {
                     console.log('err');
                     console.log(err);
