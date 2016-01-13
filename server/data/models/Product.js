@@ -85,16 +85,16 @@ module.exports.init = function () {
                                 console.log(err);
                                 return;
                             }
-                            categories[0].products.push(product);
+                           // categories[0].products.push(product);
 
-                            Category.update({_id: categories[index]._id}, categories[index], function (err, category) {
-                                if (err) {
-                                    console.log(err);
-                                }
-                                else {
-                                    console.log('Products are added to some category');
-                                }
-                            });
+                            //Category.update({_id: categories[index]._id}, categories[index], function (err, category) {
+                            //    if (err) {
+                            //        console.log(err);
+                            //    }
+                            //    else {
+                            //        console.log('Products are added to some category');
+                            //    }
+                            //});
 
                         });
                     }
