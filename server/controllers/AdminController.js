@@ -30,10 +30,14 @@ module.exports = {
                 res.redirect('/admin/categories/add');
             });
     },
-    getEditCategory: function (req, res, next) {
+    getEditCategory: function (req, res) {
         var editCategoryId = req.params.id;
-        console.log(editCategoryId);
-        services.categories.getProductsByCategoryId(editCategoryId)
+        var sortBy = req.query.date || 'desc';
+        var sortPrice = req.query.price || 'desc';
+        var username = req.query.username || '';
+        var page = req.query.page || 1;
+
+        services.categories.getProductsByCategoryId(editCategoryId, sortBy, sortPrice, username, page)
             .then(function (category) {
                 return category;
             }, function (err) {
@@ -48,7 +52,7 @@ module.exports = {
                 })
             });
     },
-    postEditCategory: function (req, res, next) {
+    postEditCategory: function (req, res) {
         var newCategory = {
             name: req.body.name,
             id: req.params.id
@@ -57,16 +61,18 @@ module.exports = {
         services.categories.update(newCategory.id, newCategory).then(function (categories) {
             res.redirect('/admin/home');
         }, function (err) {
-            req.session.error = 'Category could not be updated successfully: ' + err;
+            req.session.error = 'Category could not be updated successfully';
+            console.log(err);
             res.redirect('/admin/home');
-        })
+        });
     },
-    deleteProduct: function (req, res, next) {
+    deleteProduct: function (req, res) {
         var productId = req.params.id;
         services.products.deleteProductById(productId)
             .then(function (err) {
                 if (err) {
-                    req.session.error = 'Could not delete product: ' + err;
+                    req.session.error = 'Could not delete product!';
+                    console.log(err);
                 }
 
                 res.redirect('/admin/home');
