@@ -46,18 +46,19 @@ block main-content
                                 if (currentUser)
                                     a.btn.btn-default(href='/products/details/' + product.id)
                                         | Details
-        div(id="page-selection") Pagination goes here
+        .row
+            div.col-md-6.col-md-offset-4(id="page-selection")
         script.
             var currentPage = window.location.search.split('page=')[1];
             console.log(window.location.search);
             $('#page-selection').bootpag({
-                total: 20,
+                total: #{numberOfPages},
                 page: currentPage,
                 maxVisible: 5,
                 leaps: true,
                 firstLastUse: true,
-                first: '?',
-                last: '?',
+                first: '<<',
+                last: '>>',
                 wrapClass: 'pagination',
                 activeClass: 'active',
                 disabledClass: 'disabled',
