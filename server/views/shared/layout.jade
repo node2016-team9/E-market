@@ -32,6 +32,10 @@ html
                         if (currentUser)
                             li
                                 a(href="/profile") #{currentUser.username}
+                                    if (!currentUser.avatar)
+                                        img(src="http://www.locovida.in/wp-content/uploads/2015/11/users.png", style="width: 30px;")
+                                    if(currentUser.avatar)
+                                        img(src="#(currentUser.avatar)", style="width: 30px;")
                     form.navbar-form.navbar-right(method="post", action='/login')
                         if(currentUser)
                             if(currentUser.roles.indexOf('admin') > -1)
@@ -44,7 +48,12 @@ html
                             button.btn.btn-default(type="submit") Login
                             a.btn.btn-default(href="/register") Register
                         else
-                            a(href="/logout") Logout
+                            div.row
+                            .form-group
+                                div.col-md-2
+                                 a(href="/logout").btn.btn-default Logout
+                                div.col-md-1.col-lg-offset-3
+                                 a(href="/profile/information").btn.btn-info Details
                 if (errorMessage)
                     .alert.alert-danger #{errorMessage}
                 .jumbotron

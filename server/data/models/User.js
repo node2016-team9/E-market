@@ -12,6 +12,10 @@ module.exports.init = function () {
         roles: [{type: String}],
 
         orders: [{type: Schema.Types.ObjectId, ref: 'Products'}],
+        firstName: String,
+        lastName: String,
+        phoneNumber: String,
+        avatar: String
 
     });
 

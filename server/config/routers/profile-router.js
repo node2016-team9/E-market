@@ -1,10 +1,13 @@
 var router = require('express').Router(),
+    auth = require('../auth'),
     controllers = require('../../controllers');
 
 
 router
-    .get('/', controllers.users.getProfile)
-    .get('/orders', controllers.users.getOrders);
+    .get('/', auth.isAuthenticated, controllers.users.getProfile)
+    .get('/orders', auth.isAuthenticated, controllers.users.getOrders)
+    .get('/information', auth.isAuthenticated, controllers.users.getInformation)
+    .post('/information', auth.isAuthenticated, controllers.users.postInformation);
 
 
 module.exports = function (app) {

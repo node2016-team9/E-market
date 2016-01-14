@@ -79,5 +79,16 @@ module.exports = {
                 console.log("End of orders");
                 res.render(CONTROLLER_NAME + '/orders', {currentUser: req.user, orders: orders})
             })
+    },
+    getInformation: function (req, res, next) {
+        res.render(CONTROLLER_NAME + '/information', {currentUser: req.user})
+    },
+    postInformation: function (req, res, next) {
+        console.log("In post information");
+        var userNewData = req.body;
+        var id = req.user._id;
+
+
+
     }
 };
