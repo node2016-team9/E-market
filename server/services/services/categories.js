@@ -100,5 +100,18 @@ module.exports = {
             })
         });
         return promise;
+    },
+    removeCategoryById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            categories.remove(id, function (err, removedCount) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(removedCount);
+                }
+            });
+        });
+
+        return promise;
     }
 }

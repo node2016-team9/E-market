@@ -9,7 +9,7 @@ module.exports = {
         Category.create(category, callback);
     },
     getCategoryByName: function (name, callback) {
-        Category.find({name: name}, callback);
+        Category.findOne({name: name}, callback);
     },
     getCategoryById: function (id, callback) {
         Category.findOne({_id: id}, callback);
@@ -89,5 +89,8 @@ module.exports = {
                     return callback(null, done.products.length);
                 }
             })
+    },
+    remove: function (id, callback) {
+        Category.find({_id: id}).remove(callback);
     }
 };
