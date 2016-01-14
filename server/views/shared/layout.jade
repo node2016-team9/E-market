@@ -12,7 +12,10 @@ html
         script(src="/libs/bootpag/lib/jquery.bootpag.min.js")
         script(src="/libs/moment/moment.js")
 
-    body(ng-app)
+
+
+
+    body(ng-app="auction" ng-cloak)
         #wrapper(ng-class='{toggled:toggle}')
             #sidebar-wrapper
                 ul.sidebar-nav
