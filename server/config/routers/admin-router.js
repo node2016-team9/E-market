@@ -12,6 +12,8 @@ router
     .get('/users/:username/edit', controllers.admin.getEditUser)
     .get('/users/:username/delete', controllers.admin.getDeleteUser)
     .get('/categories/delete', controllers.admin.getDeleteCategory)
+    .get('/users/:username/orders', controllers.admin.getUserOrders)
+    .get('/users/:username/products', controllers.admin.getUserProducts)
     .post('/users/:username/edit', controllers.admin.postEditUser)
     .post('/categories/add', controllers.admin.postAddCategory)
     .post('/categories/delete', controllers.admin.postDeleteCategory)

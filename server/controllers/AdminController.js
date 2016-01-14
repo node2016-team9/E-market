@@ -196,7 +196,7 @@ module.exports = {
             });
     },
     getDeleteUser: function (req, res) {
-        var username = req.params.username;
+        var username = decodeURIComponent(req.params.username);
 
         services.users.removeUserByUsername(username)
             .then(function () {
@@ -204,6 +204,58 @@ module.exports = {
             }, function (err) {
                 req.session.error = 'Could not delete user ' + req.params.username;
                 console.log(err);
+            });
+    },
+    getUserOrders: function (req, res) {
+        var username = decodeURIComponent(req.params.username);
+
+        services.categories.getAll()
+            .then(function (categories) {
+                return categories;
+            }, function (err) {
+                console.log(err);
+                req.session.error = 'Could not retrieve categories!';
+            })
+            .then(function (categories) {
+                services.orders.getUserOrdersByUsername(username)
+                    .then(function (orders) {
+                        res.render('admin/all-user-orders.jade', {
+                            categories: categories,
+                            currentUser: req.user,
+                            userOrders: orders,
+                            requestedUsername: username});
+                    }, function (err) {
+                        req.session.error = 'Could not load user orders';
+                        res.redirect('/admin/home');
+                        console.log(err);
+                    });
+            });
+    },
+    getUserProducts: function (req, res) {
+        var username = decodeURIComponent(req.params.username);
+
+        console.log('ok');
+        services.categories.getAll()
+            .then(function (categories) {
+                return categories;
+            }, function (err) {
+                console.log(err);
+                req.session.error = 'Could not retrieve categories!';
+            })
+            .then(function (categories) {
+                console.log("ok");
+                services.users.getUserProductsByUsername(username)
+                    .then(function (products) {
+                        console.log(products);
+                        res.render('admin/all-user-products.jade', {
+                            categories: categories,
+                            currentUser: req.user,
+                            userProducts: products});
+                    }, function (err) {
+                        req.session.error = 'Could not load user products';
+                        res.redirect('/admin/home');
+                        console.log(err);
+                    });
             });
     }
 };

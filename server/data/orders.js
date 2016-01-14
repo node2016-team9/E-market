@@ -19,5 +19,10 @@ module.exports = {
             .where("_id")
             .in(idArray)
             .exec(callback);
+    },
+    getUserOrdersByUsername: function (username, callback) {
+        Order.find({ orderedBy: username })
+            .populate('productId')
+            .exec(callback);
     }
 };

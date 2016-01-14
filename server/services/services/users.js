@@ -42,6 +42,19 @@ module.exports = {
         });
         return promise;
     },
+    getUserProductsByUsername: function (username) {
+        var promise = new Promise(function (resolve, reject) {
+            users.getUserProductsByUsername(username, function (err, products) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(products);
+                }
+            });
+        });
+
+        return promise;
+    },
     getUserById: function (id) {
         var promise = new Promise(function (resolve, reject) {
             users.getUserById(id, function (err, user) {

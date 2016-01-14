@@ -8,6 +8,9 @@ block main-content
             thead
                 tr
                     th Username
+                    th Email
+                    th Firstname
+                    th Lastname
                     th Role
                     th Posted products
                     th Orders
@@ -31,6 +34,9 @@ block main-content
                                         | &nbsp; standard user
                                     br
                         td
+                        td= user.email
+                        td= user.firstName
+                        td= user.lastName
                             a(href='/admin/users/' + encodeURIComponent(user.username) + '/products') View
                         td
                             a(href='/admin/users/' + encodeURIComponent(user.username) + '/orders') View

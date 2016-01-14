@@ -1,0 +1,21 @@
+extends ../shared/admin-layout
+
+block main-content
+    if (userProducts && userProducts.length > 0)
+        fieldset
+            legend Orders for user #{requestedUsername}
+        table.table.table-striped.table-hover.table-bordered
+            thead
+                tr
+                    th Product
+                    th Posted on
+                    th Details
+            tbody
+                each product in userProducts
+                    tr
+                        td= product.name
+                        td= product.postedDate
+                        td
+                            a(href="/products/details/#{order.productId._id}") Details
+    else
+        .alert.alert-info Could not find any products for user #{requestedUsername}.
