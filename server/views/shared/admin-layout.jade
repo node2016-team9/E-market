@@ -2,6 +2,7 @@ doctype
 html
     head
         title Auction administration
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/site.css")
         link(rel="stylesheet" href="/css/bootstrap-theme.min.css")
@@ -11,24 +12,35 @@ html
             #sidebar-wrapper
                 ul.sidebar-nav
                     li.sidebar-brand
-                        | Edit categories
-                        li
-                            a(href='/admin/categories/add')
-                                span.glyphicon.glyphicon-plus
-                                |  Add category
+                        | Categories & products
                     if (categories)
                         each category in categories
-                            li
-                                if (editCategory && editCategory._id === category._id)
-                                    a(href='/admin/categories/' + category._id + '/edit')
-                                        b
-                                            | #{category.name} (Editing)
-                                else
+                            if (editCategory && (editCategory.name === category.name))
+                                li
+                                    a.selected(href='/admin/categories/' + category._id + '/edit')
+                                        | #{category.name}
+                            else
+                                li
                                     a(href='/admin/categories/' + category._id + '/edit')
                                         | #{category.name}
+                    li
+                        a(href='/admin/categories/add')
+                            i.fa.fa-plus
+                            | &nbsp; Add category
+                    li.sidebar-brand
+                        | Users
+                        li
+                            if (users)
+                                a.selected(href='/admin/users/all')
+                                    i.fa.fa-th-list
+                                    | &nbsp; Users table
+                            else
+                                a(href='/admin/users/all')
+                                    i.fa.fa-th-list
+                                    | &nbsp; Users table
             #page-content-wrapper
                 .navbar-header
-                    a.navbar-brand(href="/admin") Admin index
+                    a.navbar-brand(href="/admin") Admin panel
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav
                         li
