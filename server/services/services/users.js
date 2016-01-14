@@ -38,7 +38,26 @@ module.exports = {
                     resolve(user);
                 }
             })
+
         });
         return promise;
+    },
+    getUserById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            users.getUserById(id, function (err, user) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(user);
+                }
+            })
+
+        });
+        return promise;
+    },
+    getRoles: function () {
+        // Magic here
+        return ['admin', 'standard user'];
     }
 };
