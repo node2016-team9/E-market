@@ -8,8 +8,10 @@ block main-content
             thead
                 tr
                     th Username
+                    th Email
+                    th Firstname
+                    th Lastname
                     th Role
-                    th Posted products
                     th Orders
                     th Edit
                     th Delete
@@ -17,6 +19,9 @@ block main-content
                 each user in users
                     tr
                         td= user.username
+                        td= user.email
+                        td= user.firstName
+                        td= user.lastName
                         td
                             if (user.roles && user.roles.length == 0)
                                 i.fa.fa-user
@@ -30,8 +35,8 @@ block main-content
                                         i.fa.fa-user
                                         | &nbsp; standard user
                                     br
-                        td
-                            a(href='/admin/users/' + encodeURIComponent(user.username) + '/products') View
+                        //td
+                          //  a(href='/admin/users/' + encodeURIComponent(user.username) + '/products') View
                         td
                             a(href='/admin/users/' + encodeURIComponent(user.username) + '/orders') View
                         td
