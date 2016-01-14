@@ -103,7 +103,6 @@ module.exports = {
     },
     removeCategoryById: function (id) {
         var promise = new Promise(function (resolve, reject) {
-            console.log(id);
             categories.remove(id, function (err, removedCount) {
                 if (err) {
                     reject(err);

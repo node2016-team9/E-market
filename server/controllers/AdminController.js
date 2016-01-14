@@ -98,6 +98,7 @@ module.exports = {
                 console.log(err);
             })
             .then(function (category) {
+                console.log(category);
                 services.categories.removeCategoryById(category._id)
                     .then(function () {
                         res.redirect('/admin/home');

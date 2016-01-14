@@ -9,7 +9,7 @@ module.exports = {
         Category.create(category, callback);
     },
     getCategoryByName: function (name, callback) {
-        Category.find({name: name}, callback);
+        Category.findOne({name: name}, callback);
     },
     getCategoryById: function (id, callback) {
         Category.findOne({_id: id}, callback);
@@ -91,7 +91,6 @@ module.exports = {
             })
     },
     remove: function (id, callback) {
-        console.log(id);
-        Category.find({id: id}).remove(callback);
+        Category.find({_id: id}).remove(callback);
     }
 };
