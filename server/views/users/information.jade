@@ -2,23 +2,31 @@ extends ../shared/layout
 block main-content
    form.form-horizontal(method="post" action="")
       fieldset
-         legend Add Product
+         legend Edit your profile
          .form-group
-            label.col-md-4.control-label(for="name") First Name
+            label.col-md-4.control-label(for="firstName") First name
             .col-md-4
-               input.form-control( type="text", name="firstName", placeholder="First Name")
+               input.form-control(id="firstName" type="text", name="firstName", placeholder="First name")
          .form-group
-            label.col-md-4.control-label(for="price") Last Name
+            label.col-md-4.control-label(for="lastName") Last name
             .col-md-4
-               input.form-control( type="text" name="lastName", placeholder="Last Name")
+               input.form-control(id="lastName" type="text" name="lastName", placeholder="Last name")
          .form-group
-            label.col-md-4.control-label(for="image-url") Phone number
+            label.col-md-4.control-label(for="email") Email
             .col-md-4
-               input.form-control( type="text," name="phoneNumber", placeholder="Phone number")
+               input.form-control(id="email" type="email" name="email", placeholder="Email")
          .form-group
-            label.col-md-4.control-label(for="description") Avatar url
+            label.col-md-4.control-label(for="password") Password
             .col-md-4
-               textarea.form-control( name="avatar", placeholder="Avatar url")
+               input.form-control(id="password", class="form-control", type="password", name="password", placeholder="Password")
+         .form-group
+            label.col-md-4.control-label(for="phoneNUmber") Phone number
+            .col-md-4
+               input.form-control(id="phoneNumber" type="text," name="phoneNumber", placeholder="Phone number")
+         .form-group
+            label.col-md-4.control-label(for="avatarUrl") Avatar URL
+            .col-md-4
+               input.form-control(id="avatarUrl" name="avatarUrl", placeholder="Avatar URL")
          .form-group
             .col-md-4.col-md-offset-4
                input.btn.btn-primary(type="submit" value="Update information")

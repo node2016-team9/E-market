@@ -1,20 +1,25 @@
 extends ../shared/layout
 
 block main-content
-   h2.text-center Here are your orders!
-
-   div.container
-      table.table-bordered.table
-         thead
-            tr.thead-inverse
-            th.text-center Name of the order
-            th.text-center  Price
-            th.text-center  Description
-            th.text-center  Item owner
-         tbody
-            each    order in orders
-               tr.text-center
-                  td: a(href='/products/details/' + product._id)= order.name
-                  td yey
-                  td= order.description
-                  td= order.price
+   div
+      if (userOrders && userOrders.length > 0)
+         fieldset
+            legend Here are your orders
+         table.table.table-striped.table-hover.table-bordered
+            thead
+               th Name of the product
+               th Price
+               th Description
+               th Product owner
+               th Details
+            tbody
+               each order in userOrders
+                  tr
+                     td= order.productId.name
+                     td= order.productId.price
+                     td= order.productId.description
+                     td= order.productId.postedBy
+                     td
+                        a(href='/products/details/' + order.productId._id) Details
+      else
+         .alert.alert-info You don't have any orders.

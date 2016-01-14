@@ -14,11 +14,8 @@ module.exports.init = function () {
         firstName: {type: String},
         lastName: {type: String},
         orders: [{type: Schema.Types.ObjectId, ref: 'Products'}],
-        firstName: String,
-        lastName: String,
         phoneNumber: String,
         avatar: String
-
     });
 
     userSchema.method({

@@ -34,11 +34,11 @@ html
                             a(href="/") Home
                         if (currentUser)
                             li
-                                a(href="/profile") #{currentUser.username}
+                                a(href="/profile") #{currentUser.username} &nbsp;
                                     if (!currentUser.avatar)
                                         img(src="http://www.locovida.in/wp-content/uploads/2015/11/users.png", style="width: 30px;")
                                     if(currentUser.avatar)
-                                        img(src="#(currentUser.avatar)", style="width: 30px;")
+                                        img(src="#{currentUser.avatar}", style="width: 30px;height: 30px;")
                     form.navbar-form.navbar-right(method="post", action='/login')
                         if(currentUser)
                             if(currentUser.roles.indexOf('admin') > -1)
