@@ -15,7 +15,7 @@ module.exports = {
                 req.session.error = 'Could not retrieve categories!';
             });
     },
-    getAddCategory: function (req, res, next) {
+    getAddCategory: function (req, res) {
         categories.getAll(function (err, data) {
             if (err) {
                 console.log(err);
@@ -73,6 +73,40 @@ module.exports = {
             console.log(err);
             res.redirect('/admin/home');
         });
+    },
+    getDeleteCategory: function (req, res) {
+        categories.getAll(function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('admin/delete-category.jade', { categories: data, currentUser: req.user });
+            }
+        });
+    },
+    postDeleteCategory: function (req, res) {
+        var categoryName = req.body.name;
+
+        if (categoryName !== req.body.confirmName) {
+            req.session.error = 'The category name and the confirmation name should match!';
+            res.redirect('/admin/categories/delete');
+        }
+
+        services.categories.getCategoryByName(categoryName)
+            .then(function (category) {
+                return category;
+            }, function (err) {
+                console.log(err);
+            })
+            .then(function (category) {
+                services.categories.removeCategoryById(category._id)
+                    .then(function () {
+                        res.redirect('/admin/home');
+                    }, function (err) {
+                        req.session.error = 'Either category could not be deleted or the products associated with it.';
+                        res.redirect('/admin/home');
+                        console.log(err);
+                    });
+            });
     },
     deleteProduct: function (req, res) {
         var productId = req.params.id;
@@ -137,7 +171,6 @@ module.exports = {
 
         var currentUsername = decodeURIComponent(req.params.username);
 
-        console.log(req.body.role);
         services.users.getUserByUsername(currentUsername)
             .then(function (currentUserData) {
                 if (req.body.role.length > 0 && currentUserData.roles.indexOf(req.body.role) < 0) {
@@ -153,7 +186,6 @@ module.exports = {
             newUserData.hashPass = encryption.generateHashedPassword(newUserData.salt, req.body.password);
         }
 
-        console.log(newUserData);
         services.users.update(currentUsername, newUserData)
             .then(function () {
                 res.redirect('/admin/home');

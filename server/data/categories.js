@@ -89,5 +89,9 @@ module.exports = {
                     return callback(null, done.products.length);
                 }
             })
+    },
+    remove: function (id, callback) {
+        console.log(id);
+        Category.find({id: id}).remove(callback);
     }
 };

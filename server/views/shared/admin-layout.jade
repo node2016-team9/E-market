@@ -13,6 +13,18 @@ html
                 ul.sidebar-nav
                     li.sidebar-brand
                         | Categories & products
+                    li
+                        hr
+                    li
+                        a(href='/admin/categories/add')
+                            i.fa.fa-plus
+                            | &nbsp; Add category
+                    li
+                        a(href='/admin/categories/delete')
+                            i.fa.fa-trash-o
+                            | &nbsp; Delete category
+                    li
+                        hr
                     if (categories)
                         each category in categories
                             if (editCategory && (editCategory.name === category.name))
@@ -23,10 +35,6 @@ html
                                 li
                                     a(href='/admin/categories/' + category._id + '/edit')
                                         | #{category.name}
-                    li
-                        a(href='/admin/categories/add')
-                            i.fa.fa-plus
-                            | &nbsp; Add category
                     li.sidebar-brand
                         | Users
                         li
