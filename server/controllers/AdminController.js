@@ -194,5 +194,16 @@ module.exports = {
                 req.session.error = 'Could not update user ' + req.params.username;
                 console.log(err);
             });
+    },
+    getDeleteUser: function (req, res) {
+        var username = req.params.username;
+
+        services.users.removeUserByUsername(username)
+            .then(function () {
+                res.redirect('/admin/home');
+            }, function (err) {
+                req.session.error = 'Could not delete user ' + req.params.username;
+                console.log(err);
+            });
     }
 };

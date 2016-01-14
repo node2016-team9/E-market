@@ -59,5 +59,18 @@ module.exports = {
     getRoles: function () {
         // Magic here
         return ['admin', 'standard user'];
+    },
+    removeUserByUsername: function (username) {
+        var promise = new Promise(function (resolve, reject) {
+            users.removeUserByUsername(username, function (err, removeCount) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(removeCount);
+                }
+            })
+        });
+
+        return promise;
     }
 };

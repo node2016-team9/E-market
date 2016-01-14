@@ -15,5 +15,8 @@ module.exports = {
     },
     getUserByUsername: function (username, callback) {
         User.findOne({ username: username }, callback);
+    },
+    removeUserByUsername: function (username, callback) {
+        User.find({username: username}).remove(callback);
     }
 };

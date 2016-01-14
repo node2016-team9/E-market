@@ -10,6 +10,7 @@ router
     .get('/products/:id/delete', controllers.admin.deleteProduct)
     .get('/users/all', controllers.admin.getAllUsers)
     .get('/users/:username/edit', controllers.admin.getEditUser)
+    .get('/users/:username/delete', controllers.admin.getDeleteUser)
     .get('/categories/delete', controllers.admin.getDeleteCategory)
     .post('/users/:username/edit', controllers.admin.postEditUser)
     .post('/categories/add', controllers.admin.postAddCategory)
