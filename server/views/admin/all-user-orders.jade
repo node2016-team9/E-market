@@ -1,0 +1,21 @@
+extends ../shared/admin-layout
+
+block main-content
+    if (userOrders && userOrders.length > 0)
+        fieldset
+            legend Orders for user #{requestedUsername}
+        table.table.table-striped.table-hover.table-bordered
+            thead
+                tr
+                    th Product
+                    th Product details
+                    th Order date
+            tbody
+                each order in userOrders
+                    tr
+                        td= order.productId.name
+                        td
+                            a(href="/products/details/#{order.productId._id}") Details
+                        td= order.orderDate
+    else
+        .alert.alert-info Could not find any orders for user #{requestedUsername}.

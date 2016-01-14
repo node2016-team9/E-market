@@ -22,11 +22,9 @@ block main-content
                                 strong #{moment(product.postedDate).format('LLL')}
                             li.list-group-item Description:
                                 strong= product.description
-        form.row(action="/products/details/order",method="post")
-            .col-md-2
-                input(type="hidden" name="productId", value=product.id)
-            .col-md-2.col-md-offset-6
-                button.btn.btn-success(type="submit") Order Product
+    div.row(ng-controller="OrdersController as vm")
+        .col-md-2.col-md-offset-6
+            button.btn.btn-success(ng-click="vm.addOrder('#{product.id}')") Order Product
         br
         .row
             .col-md-2.col-md-offset-8

@@ -10,10 +10,11 @@ module.exports = {
             .then(function (product) {
                 console.log('orders');
                 console.log(product);
-
-                res.render('orders/product-orders', {product: product, currentUser: req.user});
+                services.categories.getAll()
+                    .then(function (categories) {
+                        res.render('orders/product-orders', {product: product, currentUser: req.user,categories: categories});
+                    })
             })
-
     }
 
 }

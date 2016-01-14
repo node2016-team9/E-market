@@ -49,5 +49,18 @@ module.exports = {
             })
         });
         return promise;
+    },
+    getUserOrdersByUsername: function (username, callback) {
+        var promise = new Promise(function (resolve, reject) {
+            orders.getUserOrdersByUsername(username, function (err, orders) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(orders);
+                }
+            });
+        });
+
+        return promise;
     }
 };

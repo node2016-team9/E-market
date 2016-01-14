@@ -14,7 +14,7 @@ module.exports = {
         newProduct.postedBy = user.username;
         newProduct.categoryId = currentCategory;
         services.products.add(newProduct).then(function (product) {
-            res.redirect('/categories/'+currentCategory);
+            res.redirect('/categories/' + currentCategory);
         }, function (err) {
             req.status(404)
                 .send(err);
@@ -51,8 +51,9 @@ module.exports = {
         services.products.getProductById(order.productId)
             .then(function (product) {
                 if (product.postedBy == req.user.username) {
-                    req.session.error = 'You cannot order this product because you posted it';
-                    res.redirect('/products/details/' + order.productId);
+                    res.status(404)
+                        .send({error: 'You cannot order products that you posted it'});
+                    //res.redirect('/products/details/' + order.productId);
                 }
                 else {
                     order.orderedBy = req.user.username;

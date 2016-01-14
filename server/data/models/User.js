@@ -10,7 +10,9 @@ module.exports.init = function () {
         points: Number,
         postedProducts: [{type: Schema.Types.ObjectId, ref: 'Products'}],
         roles: [{type: String}],
-
+        email: {type: String, require: true, unique: true},
+        firstName: {type: String},
+        lastName: {type: String},
         orders: [{type: Schema.Types.ObjectId, ref: 'Products'}],
         firstName: String,
         lastName: String,
@@ -42,26 +44,41 @@ module.exports.init = function () {
             var hashedPwd;
 
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Ivaylo');
+            hashedPwd = encryption.generateHashedPassword(salt, 'aleks123');
             User.create({
-                username: 'ivaylo.kenov',
-                email: 'ivaylo@gmail.com',
+                username: 'aleks.stojcheva',
+                email: 'aleks@yahoo.com',
                 salt: salt,
                 hashPass: hashedPwd,
+                firstName: 'Aleksandra',
+                lastName: 'Stojcheva',
                 roles: ['admin']
             });
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Nikolay');
+            hashedPwd = encryption.generateHashedPassword(salt, 'ivo123');
             User.create({
-                username: 'Nikolay.IT',
-                email: 'nikolay@gmail.com',
+                username: 'ivo.arnaudov',
+                email: 'ivo@yahoo.com',
                 salt: salt,
                 hashPass: hashedPwd,
-                roles: ['standard']
+                firstName: 'Ivaylo',
+                lastName: 'Arnaudov',
+                roles: ['admin']
             });
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Doncho');
-            User.create({username: 'Doncho', email: 'doncho@gmail.com', salt: salt, hashPass: hashedPwd});
+            hashedPwd = encryption.generateHashedPassword(salt, 'vlado123');
+            User.create(
+                {
+                    username: 'vladimir',
+                    email: 'vlado@yahoo.com',
+                    salt: salt,
+                    hashPass: hashedPwd,
+                    firstName: 'Vladimir',
+                    lastName: 'Iliev',
+                    roles: ['admin']
+
+                }
+            );
             console.log('Users added to database...');
         }
     });

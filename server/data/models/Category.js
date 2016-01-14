@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+
 module.exports.init = function () {
     var categorySchema = new mongoose.Schema({
         name: {type: String, require: true, unique: true},
@@ -22,6 +23,8 @@ module.exports.init = function () {
             console.log('Categories added to database...');
         }
     });
+
+    categorySchema.pre('remove', function (next) {
+        this.model('Product').remove({ categoryId: this._id }, next);
+    });
 };
-
-
