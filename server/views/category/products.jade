@@ -11,12 +11,6 @@ block main-content
             form(action="/categories/" + currentCategoryID,method="get")
                 .row.text-center
                     .col-md-3
-                        select.form-control(name="date")
-                            option(value='')
-                                | Sort By Date
-                            option(value='desc') Desc
-                            option(value='asc') Asc
-                    .col-md-3
                         select.form-control(name="price")
                             option(value='')
                                 | Sort By Price
