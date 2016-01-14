@@ -42,7 +42,7 @@ module.exports = {
                                     currentUser: req.user,
                                     currentCategoryID: id,
                                     categories: categories,
-                                    numberOfPages: ((category.products.length / 3) | 0 )+ 1
+                                    numberOfPages: ((count / 3) | 0 )+ 1
 
                                 });
                             })
